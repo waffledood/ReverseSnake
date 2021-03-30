@@ -1,0 +1,5 @@
+*.i
+*.o
+*.elf
+*.gba
+main.s
