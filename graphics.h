@@ -1,8 +1,27 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
 
+#include "numbers.h"
+
 #define SPRITE_WIDTH 10
 #define EMPTY_DIGIT -1
+
+void initializeGraphics() {
+    int i;
+
+    // Set Mode 2
+    *(unsigned short *)0x4000000 = 0x40 | 0x2 | 0x1000;
+
+    // Fill SpritePal
+    *(unsigned short *)0x5000200 = 0;
+    *(unsigned short *)0x5000202 = RGB(31, 0, 0);
+
+    // Fill SpriteData
+    for (i = 0; i < 10 * 8 * 8 / 2; i++)
+        spriteData[i] = (numbers[i * 2 + 1] << 8) + numbers[i * 2];
+    for (i = 0; i < 128; i++)
+        drawSprite(0, i, 240, 160);
+}
 
 void drawSprite(int numb, int N, int x, int y) {
     // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
@@ -31,4 +50,4 @@ void drawU16(unsigned short num, int id, int x, int y) {
         drawSprite(digit_arr[i], id + i, x_digit, y);
     }
 }
-#endif // __GRAPHICS_H__
+#endif  // __GRAPHICS_H__

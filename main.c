@@ -1,28 +1,83 @@
 // -----------------------------------------------------------------------------
 // C-Skeleton to be used with HAM Library from www.ngine.de
 // -----------------------------------------------------------------------------
-#include <mygba.h>
+
+#include "gba.h"
+#include "graphics.h"
+#include "player.h"
+
+#define INPUT (KEY_MASK & (~REG_KEYS))
+#define TICKS_PER_MILLISECOND 16781
+#define PLAYER_ID 1
+
+enum DIRECTION lastDirection = NONE;
+struct Player elongate;
+
+unsigned time = 0;
+
+void handler(void) {
+    REG_IME = 0x00;  // Stop all other interrupt handling, while we handle this current one
+
+    if ((REG_IF & INT_TIMER0) == INT_TIMER0) {
+        time++;
+        int num = time / 1000;
+        checkButton();
+        drawU16(num, 500, 180, 10);
+        movePlayer(&elongate, lastDirection);
+        drawSprite(0, PLAYER_ID, elongate.position.x, elongate.position.y);
+    }
+
+    REG_IF = REG_IF;  // Update interrupt table, to confirm we have handled this interrupt
+    REG_IME = 0x01;   // Re-enable interrupt handling
+}
+
+void initializeInterrupts() {
+    // Set Handler Function for interrupts and enable selected interrupts
+    REG_INT = (int)&handler;
+    REG_IE |= INT_TIMER0;
+    REG_IME = 0x1;  // Enable interrupt handling
+
+    // Set Timer Mode (fill that section and replace TMX with selected timer number)
+    REG_TM0D = -TICKS_PER_MILLISECOND;
+    REG_TM0CNT |= TIMER_FREQUENCY | TIMER_ENABLE | TIMER_INTERRUPTS;
+}
+
+void checkButton(void) {
+    u16 buttons = INPUT;
+
+    if ((buttons & KEY_A) == KEY_A) {
+    }
+    if ((buttons & KEY_B) == KEY_B) {
+    }
+    if ((buttons & KEY_SELECT) == KEY_SELECT) {
+    }
+    if ((buttons & KEY_START) == KEY_START) {
+    }
+    if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
+        lastDirection = RIGHT;
+    }
+    if ((buttons & KEY_LEFT) == KEY_LEFT) {
+        lastDirection = LEFT;
+    }
+    if ((buttons & KEY_UP) == KEY_UP) {
+        lastDirection = UP;
+    }
+    if ((buttons & KEY_DOWN) == KEY_DOWN) {
+        lastDirection = DOWN;
+    }
+}
 
 // -----------------------------------------------------------------------------
 // Project Entry Point
 // -----------------------------------------------------------------------------
-int main(void)
-{
-	// Initialize HAMlib
-	ham_Init();
+int main(void) {
+    initializeGraphics();
+    initializeInterrupts();
 
-	// Set background mode
-	ham_SetBgMode(0);
+    elongate = constructPlayer(50, 50, 10);
 
-	// Initialize built-in Text-System
-	ham_InitText(0);
+    while (1) {
+    }
 
-	// Draw some text
-	ham_DrawText(1, 1, "Hello World");
-
-	// Infinite loop
-	for(;;);
-	
-	return 0;
+    return 0;
 }
-
