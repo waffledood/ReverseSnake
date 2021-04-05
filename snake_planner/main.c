@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+
 int xMovement (int diffX, int snakeX, int snakeY, int xCood[]) {
     if (diffX > 0) {
         // Means the mouse is on the left of the snake
