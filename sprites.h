@@ -1,12 +1,12 @@
 #define spriteData  ((unsigned short *) 0x6010000)
 
-#define B 1
-#define BY 2
-#define LG 3
-#define MG 4 
-#define DG 5
-#define E 6
-#define R 7
+#define P 1
+#define BY 2 // Bright Yellow
+#define LG 3 // Light Green
+#define DG 4 // Dark Green
+#define MG 5 // Medium Green
+#define E 6 // White
+#define R 7 // Red
 
 #define SPRITE_SNAKE_HEAD 0
 #define SPRITE_SNAKE_BODY 1
@@ -22,6 +22,7 @@ unsigned short sprites[] = {
     DG,DG,LG, R, R,LG,LG,DG,
      0,DG,DG, R, R,LG,DG, 0,
      0, 0,DG,DG,DG,DG, 0, 0,
+     
     // 1 49 snake body 
      0, 0,DG,DG,DG,DG, 0, 0,
      0,DG,DG,BY,LG,DG,DG, 0,

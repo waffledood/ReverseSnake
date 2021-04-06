@@ -14,11 +14,21 @@ void drawSprite(int numb, int N, int x, int y);
 void drawPlayer(struct Player player);
 struct Position gridToPixelPos(struct Position gridPos);
 
-// Function to clear screen of existing sprites
-void blankScreen(void) {
+int activeGame = 0;
+
+// Function to enable & set the Main Menu for players 
+void setMenu() {
+    if (activeGame == 0) {
+        blankScreen();
+        // set up Sprites for main menu
+    }
+}
+
+// Function to clear screen of existing sprites 
+void blankScreen() {
     int i;
-    for (i = 0; i < 128; i++)
-        drawSprite(0, i, 240, 160);
+    for(i = 0; i < 128; i++)
+        drawSprite(0, i, 240,160);
 }
 
 void initializeGraphics() {
@@ -29,9 +39,9 @@ void initializeGraphics() {
 
     // Fill SpritePal
     // Color 0 (Empty)
-    *(unsigned short *)0x5000200 = 0;
-    // Color 1 (Black)
-    *(unsigned short *)0x5000202 = RGB(31, 0, 0);
+    *(unsigned short *) 0x5000200 = 0;
+    // Color 1 (Black) 
+    *(unsigned short *) 0x5000202 = RGB(31, 0, 0);
     // Color 2 (Bright Yellow)
     *(unsigned short *)0x5000204 = RGB(24, 122, 173);
     // Color 3 (Light Green)
