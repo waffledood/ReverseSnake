@@ -8,6 +8,7 @@
 
 // Function to clear screen of existing sprites 
 void blankScreen(void) {
+    int i;
     for(i = 0; i < 128; i++)
         drawSprite(0, i, 240,160);
 }
@@ -24,11 +25,11 @@ void initializeGraphics() {
     // Color 1 (Black)
     *(unsigned short *)0x5000202 = RGB(31, 0, 0);
     // Color 2 (Bright Yellow)
-    *(unsigned short *) 0x5000204 = RGB(24,122,173); 
+    *(unsigned short *)0x5000204 = RGB(24,122,173); 
     // Color 3 (Light Green)
-    *(unsigned short *) 0x5000206 = RGB(16,31,16); 
+    *(unsigned short *)0x5000206 = RGB(16,31,16); 
     // Color 4 (Darkest Green)
-    *(unsigned short *) 0x5000208 = 0x4CAF50;
+    *(unsigned short *)0x5000208 = 0x4CAF50;
     // Color 5 (Middle Green)
     *(unsigned short *) 0x500020A = 0x8BC34A;
     // Color 6 (White)
