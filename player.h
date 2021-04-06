@@ -3,6 +3,11 @@
 
 #include "motion.h"
 
+struct Player constructPlayer(int x, int y, double speed);
+void movePlayer(struct Player* p, enum DIRECTION dir);
+void setPlayerSpeed(struct Player* p, double speed);
+struct Position getPlayerPosition(struct Player p);
+
 struct Player {
     struct Position position;
     int ticksElapsed;
