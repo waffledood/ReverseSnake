@@ -8,6 +8,7 @@
 
 // Function to clear screen of existing sprites 
 void blankScreen(void) {
+    int i;
     for(i = 0; i < 128; i++)
         drawSprite(0, i, 240,160);
 }
