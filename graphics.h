@@ -1,10 +1,11 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
 
-#include "numbers.h"
+#include "sprites.h"
 
 #define SPRITE_WIDTH 10
 #define EMPTY_DIGIT -1
+#define SPRITE_PLAYER_ID 1
 
 // Function to clear screen of existing sprites 
 void blankScreen(void) {
@@ -39,7 +40,7 @@ void initializeGraphics() {
 
     // Fill SpriteData
     for (i = 0; i < 10 * 8 * 8 / 2; i++)
-        spriteData[i] = (numbers[i * 2 + 1] << 8) + numbers[i * 2];
+        spriteData[i] = (sprites[i * 2 + 1] << 8) + sprites[i * 2];
     for (i = 0; i < 128; i++)
         drawSprite(0, i, 240, 160);
 }

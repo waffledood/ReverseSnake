@@ -12,7 +12,7 @@
 #define SPRITE_SNAKE_BODY 1
 #define SPRITE_PLAYER 2
 
-unsigned short numbers[] = {
+unsigned short sprites[] = {
     // 0 48 snake head 
      0, 0,DG,DG,DG,DG, 0, 0,
      0,DG,DG,LG,LG,DG,DG, 0,
