@@ -17,6 +17,7 @@ unsigned short numbers[] = {
     DG,DG,LG, R, R,LG,LG,DG,
      0,DG,DG, R, R,LG,DG, 0,
      0, 0,DG,DG,DG,DG, 0, 0,
+     
     // 1 49 snake body 
      0, 0,DG,DG,DG,DG, 0, 0,
      0,DG,DG,BY,LG,DG,DG, 0,

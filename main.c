@@ -46,6 +46,7 @@ void checkButton(void) {
     u16 buttons = INPUT;
 
     if ((buttons & KEY_A) == KEY_A) {
+        // set up Key A as the button to start the game (from the main menu)
     }
     if ((buttons & KEY_B) == KEY_B) {
     }
