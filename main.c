@@ -6,7 +6,6 @@
 #include "graphics.h"
 #include "player.h"
 
-#define INPUT (KEY_MASK & (~REG_KEYS))
 #define TICKS_PER_MILLISECOND 16781
 #define PLAYER_ID 1
 
