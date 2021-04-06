@@ -1,15 +1,24 @@
 #ifndef __GRAPHICS_H__
 #define __GRAPHICS_H__
 
-#include "numbers.h"
+#include "player.h"
+#include "sprites.h"
 
 #define SPRITE_WIDTH 10
 #define EMPTY_DIGIT -1
-#define activeGame = false
+#define SPRITE_PLAYER_ID 1
+
+void blankScreen(void);
+void initializeGraphics();
+void drawSprite(int numb, int N, int x, int y);
+void drawPlayer(struct Player player);
+struct Position gridToPixelPos(struct Position gridPos);
+
+int activeGame = 0;
 
 // Function to enable & set the Main Menu for players 
 void setMenu() {
-    if (activeGame == false) {
+    if (activeGame == 0) {
         blankScreen();
         // set up Sprites for main menu
     }
@@ -34,21 +43,21 @@ void initializeGraphics() {
     // Color 1 (Black) 
     *(unsigned short *) 0x5000202 = RGB(31, 0, 0);
     // Color 2 (Bright Yellow)
-    *(unsigned short *) 0x5000204 = RGB(24,122,173); 
+    *(unsigned short *)0x5000204 = RGB(24, 122, 173);
     // Color 3 (Light Green)
-    *(unsigned short *) 0x5000206 = RGB(16,31,16); 
+    *(unsigned short *)0x5000206 = RGB(16, 31, 16);
     // Color 4 (Darkest Green)
-    *(unsigned short *) 0x5000208 = 0x4CAF50;
+    *(unsigned short *)0x5000208 = 0x4CAF50;
     // Color 5 (Middle Green)
-    *(unsigned short *) 0x500020A = 0x8BC34A;
+    *(unsigned short *)0x500020A = 0x8BC34A;
     // Color 6 (White)
-    *(unsigned short *) 0x500020C = RGB(31,31,31);
+    *(unsigned short *)0x500020C = RGB(31, 31, 31);
     // Color 7 (Red)
-    *(unsigned short *) 0x500020E = RGB(31,0,0);
+    *(unsigned short *)0x500020E = RGB(31, 0, 0);
 
     // Fill SpriteData
     for (i = 0; i < 10 * 8 * 8 / 2; i++)
-        spriteData[i] = (numbers[i * 2 + 1] << 8) + numbers[i * 2];
+        spriteData[i] = (sprites[i * 2 + 1] << 8) + sprites[i * 2];
     for (i = 0; i < 128; i++)
         drawSprite(0, i, 240, 160);
 }
@@ -58,6 +67,20 @@ void drawSprite(int numb, int N, int x, int y) {
     *(unsigned short *)(0x7000000 + 8 * N) = y | 0x2000;
     *(unsigned short *)(0x7000002 + 8 * N) = x;
     *(unsigned short *)(0x7000004 + 8 * N) = numb * 2;
+}
+
+void drawPlayer(struct Player player) {
+    struct Position pixelPos;
+    pixelPos = gridToPixelPos(player.position);
+    drawSprite(SPRITE_PLAYER, SPRITE_PLAYER_ID, pixelPos.x, pixelPos.y);
+}
+
+struct Position gridToPixelPos(struct Position gridPos) {
+    struct Position pixelPos;
+    pixelPos.x = gridPos.x * GRID_CELL_SIZE;
+    pixelPos.y = gridPos.y * GRID_CELL_SIZE;
+
+    return pixelPos;
 }
 
 void drawU16(unsigned short num, int id, int x, int y) {
