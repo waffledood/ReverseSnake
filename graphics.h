@@ -13,8 +13,22 @@ void initializeGraphics() {
     *(unsigned short *)0x4000000 = 0x40 | 0x2 | 0x1000;
 
     // Fill SpritePal
+    // Color 0 (Empty)
     *(unsigned short *)0x5000200 = 0;
+    // Color 1 (Black)
     *(unsigned short *)0x5000202 = RGB(31, 0, 0);
+    // Color 2 (Bright Yellow)
+    *(unsigned short *) 0x5000204 = RGB(24,122,173); 
+    // Color 3 (Light Green)
+    *(unsigned short *) 0x5000206 = RGB(16,31,16); 
+    // Color 4 (Darkest Green)
+    *(unsigned short *) 0x5000208 = 0x4CAF50;
+    // Color 5 (Middle Green)
+    *(unsigned short *) 0x500020A = 0x8BC34A;
+    // Color 6 (White)
+    *(unsigned short *) 0x500020C = RGB(31,31,31);
+    // Color 7 (Red)
+    *(unsigned short *) 0x500020E = RGB(31,0,0);
 
     // Fill SpriteData
     for (i = 0; i < 10 * 8 * 8 / 2; i++)
