@@ -1,5 +1,16 @@
 #define spriteData  ((unsigned short *) 0x6010000)
-#define P 1
+
+#define B 1
+#define BY 2
+#define LG 3
+#define MG 4 
+#define DG 5
+#define E 6
+#define R 7
+
+#define SPRITE_SNAKE_HEAD 0
+#define SPRITE_SNAKE_BODY 1
+#define SPRITE_PLAYER 2
 
 unsigned short numbers[] = {
     // 0 48 snake head 
