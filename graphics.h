@@ -6,6 +6,7 @@
 #define SPRITE_WIDTH 10
 #define EMPTY_DIGIT -1
 
+// Function to clear screen of existing sprites 
 void blankScreen(void) {
     for(i = 0; i < 128; i++)
         drawSprite(0, i, 240,160);
