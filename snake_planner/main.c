@@ -1,24 +1,44 @@
-// Alogtherim Outline
+// Algo Outline
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 
+int *arrayMove(int x, int arr[], int num) {
+    
+    int temp;
+
+    for (int i=0; i<num; ++i) {
+        if (i<num-1) {
+            temp = arr[i+1];
+            arr[i] = temp;
+        } else {
+            arr[i] = x;
+        }
+    }
+
+    for (int i=0; i<num; ++i) {
+        printf("Snake's cell postion,%i\n", arr[i]);
+    }
+
+    return arr;
+}
 
 int xMovement (int diffX, int snakeX, int snakeY, int xCood[], int num) {
     if (diffX > 0) {
         // Means the mouse is on the left of the snake
         for (int i=1; i<=diffX; ++i) {
             snakeX -= 1;
-            printf("Snake pose: %i , %i\n", snakeX, snakeY);
-            //arrayX(xCood, num);
+            printf("Next Snake pose: %i , %i\n", snakeX, snakeY);
+            xCood=arrayMove(snakeX, xCood, num);
         }
 
     } else if (diffX < 0) {
         // Means the mouse is on the right of the snake 
         for (int i=1; i<=(-diffX); ++i) {
             snakeX += 1;
-            printf("Snake pose: %i , %i\n", snakeX, snakeY);
+            printf("Next Snake pose: %i , %i\n", snakeX, snakeY);
+            xCood=arrayMove(snakeX, xCood, num);
         }
     } else {
         //means X match
@@ -33,19 +53,20 @@ int yMovement(int diffY, int snakeX, int snakeY,int yCood[], int num) {
         // Means the mouse is on the top of the snake 
         for (int i=1; i<=diffY; ++i) {
             snakeY -= 1;
-            printf("Snake pose: %i , %i\n", snakeX, snakeY);
+            printf("Next Snake pose: %i , %i\n", snakeX, snakeY);
+            yCood=arrayMove(snakeY, yCood, num);
         }
     } else if (diffY < 0){
         // Means the mouse is on the right of the snake 
         for (int i=1; i<=(-diffY); ++i) {
             snakeY += 1;
-            printf("Snake pose: %i , %i\n", snakeX, snakeY);
+            printf("Next Snake pose: %i , %i\n", snakeX, snakeY);
+            yCood=arrayMove(snakeY, yCood, num);
         }
     } else {
         // means Y match 
         printf("Y match!");
     }
-
     return snakeY;
 }
 
@@ -58,21 +79,6 @@ void randLimit(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimit
     *goalY = rand()%(upperLimitY + 1 - lowerLimitY) + lowerLimitY;  
 }
 
-/*
-int arrayX(int x, int xCood[], int num) {
-    
-    
-    int temp = xCood[num-1];
-    xCood[num-1] = x;
-
-    int temp2;
-    for (int i=num-2; i>=0; ++i) {
-        temp2 = xCood[i];
-    }
-
-}
-
-*/
 int dist(int snakePose,int mousePose) {
     
     int diff = snakePose - mousePose;
@@ -89,7 +95,7 @@ int main() {
     randLimit(0,6,4,10,&goalX, &goalY);
     randLimit(7,0,10,4,&mouseXPose, &mouseYPose);
 
-    int num = 5;
+    int num = 3;
 
     int snakeX = 5;
     int snakeY = 5;
@@ -97,8 +103,8 @@ int main() {
     printf("Starting pose; X: %i , Y: %i\n", mouseXPose, mouseYPose);
     printf("End goal; X: %i , Y: %i\n", goalX, goalY);
 
-    int diffX = dist(snakeX, mouseXPose);
-    int diffY = dist(snakeY, mouseYPose);
+    int diffX = dist(snakeX, goalX);
+    int diffY = dist(snakeY, goalY);
 
     printf("diffX: %i, diffY: %i\n", diffX, diffY); 
 
@@ -108,11 +114,13 @@ int main() {
 
     if ((diffX > diffY) || (diffX == diffY)) {
        snakeX = xMovement(diffX, snakeX, snakeY, xCood, num);
+       printf("Moved to Y movement!\n");
        snakeY = yMovement(diffY, snakeX, snakeY, yCood, num);
        printf("Final Snake Pose; X: %i, Y: %i\n" , snakeX, snakeY );
 
     } else if (diffX < diffY) {
        snakeY = yMovement(diffY, snakeX, snakeY, yCood, num);
+       printf("Moved to X movement!\n");
        snakeX = xMovement(diffX, snakeX, snakeY, xCood, num);
        printf("Final Snake Pose; X: %i, Y: %i\n" , snakeX, snakeY );       
     }
