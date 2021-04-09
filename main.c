@@ -5,13 +5,14 @@
 #include "gba.h"
 #include "graphics.h"
 #include "player.h"
+#include "snake.h"
 
-#define INPUT (KEY_MASK & (~REG_KEYS))
 #define TICKS_PER_MILLISECOND 16781
 #define PLAYER_ID 1
 
 enum DIRECTION lastDirection = NONE;
 struct Player elongate;
+struct Snake snake;
 
 unsigned time = 0;
 
@@ -22,9 +23,11 @@ void handler(void) {
         time++;
         int num = time / 1000;
         checkButton();
-        drawU16(num, 500, 180, 10);
+        // drawU16(num, 500, 180, 10);
         movePlayer(&elongate, lastDirection);
+        // moveSnake(&snake, elongate.position);
         drawPlayer(elongate);
+        drawSnake(&snake);
     }
 
     REG_IF = REG_IF;  // Update interrupt table, to confirm we have handled this interrupt
@@ -68,6 +71,17 @@ void checkButton(void) {
     }
 }
 
+struct Position randLimit(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimitY) {
+    srand(time);
+
+    struct Position pos;
+
+    pos.x = rand() % (upperLimitX + 1 - lowerLimitX) + lowerLimitX;
+    pos.y = rand() % (upperLimitY + 1 - lowerLimitY) + lowerLimitY;
+
+    return pos;
+}
+
 // -----------------------------------------------------------------------------
 // Project Entry Point
 // -----------------------------------------------------------------------------
@@ -75,7 +89,11 @@ int main(void) {
     initializeGraphics();
     initializeInterrupts();
 
-    elongate = constructPlayer(50, 50, 10);
+    struct Position pos;
+    pos = randLimit(7, 0, 23, 10);
+
+    elongate = constructPlayer(pos.x, pos.y, 10);
+    snake = constructSnake(3, 3, 1);
 
     while (1) {
     }

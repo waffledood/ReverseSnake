@@ -2,21 +2,24 @@
 #define __GRAPHICS_H__
 
 #include "player.h"
+#include "snake.h"
 #include "sprites.h"
 
 #define SPRITE_WIDTH 10
 #define EMPTY_DIGIT -1
 #define SPRITE_PLAYER_ID 1
+#define SPRITE_SNAKE_ID 2
 
 void blankScreen(void);
 void initializeGraphics();
-void drawSprite(int numb, int N, int x, int y);
+void drawSprite(int spriteId, int N, int x, int y);
 void drawPlayer(struct Player player);
+void drawSnake(struct Snake *snake);
 struct Position gridToPixelPos(struct Position gridPos);
 
 int activeGame = 0;
 
-// Function to enable & set the Main Menu for players 
+// Function to enable & set the Main Menu for players
 void setMenu() {
     if (activeGame == 0) {
         blankScreen();
@@ -24,11 +27,11 @@ void setMenu() {
     }
 }
 
-// Function to clear screen of existing sprites 
+// Function to clear screen of existing sprites
 void blankScreen() {
     int i;
-    for(i = 0; i < 128; i++)
-        drawSprite(0, i, 240,160);
+    for (i = 0; i < 128; i++)
+        drawSprite(0, i, 240, 160);
 }
 
 void initializeGraphics() {
@@ -39,9 +42,9 @@ void initializeGraphics() {
 
     // Fill SpritePal
     // Color 0 (Empty)
-    *(unsigned short *) 0x5000200 = 0;
-    // Color 1 (Black) 
-    *(unsigned short *) 0x5000202 = RGB(31, 0, 0);
+    *(unsigned short *)0x5000200 = 0;
+    // Color 1 (Black)
+    *(unsigned short *)0x5000202 = RGB(31, 0, 0);
     // Color 2 (Bright Yellow)
     *(unsigned short *)0x5000204 = RGB(24, 122, 173);
     // Color 3 (Light Green)
@@ -62,17 +65,25 @@ void initializeGraphics() {
         drawSprite(0, i, 240, 160);
 }
 
-void drawSprite(int numb, int N, int x, int y) {
-    // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
+void drawSprite(int spriteId, int N, int x, int y) {
+    // Gift function: displays sprite number spriteId on screen at position (x,y), as sprite object N
     *(unsigned short *)(0x7000000 + 8 * N) = y | 0x2000;
     *(unsigned short *)(0x7000002 + 8 * N) = x;
-    *(unsigned short *)(0x7000004 + 8 * N) = numb * 2;
+    *(unsigned short *)(0x7000004 + 8 * N) = spriteId * 2;
 }
 
 void drawPlayer(struct Player player) {
     struct Position pixelPos;
     pixelPos = gridToPixelPos(player.position);
     drawSprite(SPRITE_PLAYER, SPRITE_PLAYER_ID, pixelPos.x, pixelPos.y);
+}
+
+void drawSnake(struct Snake *snake) {
+    int i;
+    for (i = 0; i < snake->length; i++) {
+        struct Position pixelPos = gridToPixelPos(snake->body[i]);
+        drawSprite(SPRITE_SNAKE_BODY, i + SPRITE_SNAKE_ID, pixelPos.x, pixelPos.y);
+    }
 }
 
 struct Position gridToPixelPos(struct Position gridPos) {
