@@ -10,6 +10,10 @@ struct Position {
     int y;
 };
 
+isPositionEqual(struct Position p1, struct Position p2) {
+    return (p1.x == p2.x && p1.y == p2.y) ? 1 : 0; 
+}
+
 enum DIRECTION {
     UP,
     DOWN,
