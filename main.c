@@ -17,7 +17,7 @@
 int active_game = 0;
 
 enum DIRECTION lastDirection = NONE;
-struct Player elongate;
+struct Player player;
 struct Snake snake;
 
 unsigned time = 0;
@@ -59,9 +59,17 @@ void startGame() {
     active_game = 1;
     //drawU16(num, 500, 180, 10);
     //checkButton();
-    movePlayer(&elongate, lastDirection);
-    //moveSnake(&snake, elongate.position);
-    drawPlayer(elongate);
+    movePlayer(&player, lastDirection);
+    moveSnake(&snake, player.position);
+
+    if (isPlayerEaten(&snake, &player)) {
+        active_game = 0;
+        blankScreen();
+        spawnEntities();
+        return;
+    }
+        
+    drawPlayer(player);
     drawSnake(&snake);
 }
 
@@ -81,8 +89,10 @@ void checkButton(void) {
 
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
-        blankScreen();
-        active_game = 1;
+        if (active_game == 0) {
+            blankScreen();
+            active_game = 1;
+        }
         //startGame();
     }
     if ((buttons & KEY_B) == KEY_B) {
@@ -110,7 +120,7 @@ void checkButton(void) {
     }
 }
 
-struct Position randLimit(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimitY) {
+struct Position getRandPos(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimitY) {
     srand(time);
 
     struct Position pos;
@@ -121,18 +131,38 @@ struct Position randLimit(int lowerLimitX, int lowerLimitY, int upperLimitX, int
     return pos;
 }
 
+int isPlayerEaten(struct Snake* s, struct Player* p) {
+    int i;
+    for (i = 0; i < s->length; i++)
+    {
+        struct Position snakePos = s->body[i];
+
+        if (isPositionEqual(snakePos, p->position) == 1) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+void spawnEntities() {
+    struct Position playerSpawn;
+    struct Position snakeSpawn;
+
+    playerSpawn = getRandPos(7, 0, 23, 10);
+    snakeSpawn = getRandPos(7, 0, 15, 15);
+
+    player = constructPlayer(playerSpawn.x, playerSpawn.y, 10);
+    snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
+}
+
 // -----------------------------------------------------------------------------
 // Project Entry Point
 // -----------------------------------------------------------------------------
 int main(void) {
     initializeGraphics();
     initializeInterrupts();
-
-    struct Position pos;
-    pos = randLimit(7, 0, 23, 10);
-
-    elongate = constructPlayer(pos.x, pos.y, 10);
-    snake = constructSnake(3, 3, 1);
+    spawnEntities();
 
     while (1) {
     }
