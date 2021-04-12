@@ -10,10 +10,6 @@
 #define SPRITE_PLAYER_ID 1
 #define SPRITE_SNAKE_ID 2
 
-// pseudo boolean to track the status of the game
-// 0 -> game is not active
-// 1 -> game is active 
-#define ACTIVE_GAME 0
 
 void blankScreen(void);
 void initializeGraphics();

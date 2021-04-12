@@ -10,6 +10,12 @@
 #define TICKS_PER_MILLISECOND 16781
 #define PLAYER_ID 1
 
+// pseudo boolean to track the status of the game
+// 0 -> game is not active
+// 1 -> game is active 
+//#define ACTIVE_GAME 0
+int active_game = 0;
+
 enum DIRECTION lastDirection = NONE;
 struct Player elongate;
 struct Snake snake;
@@ -21,39 +27,45 @@ void handler(void) {
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) {
         initalizeGame();
-        /*
-        time++;
-        int num = time / 1000;
-        checkButton();
-        movePlayer(&elongate, lastDirection);
-        drawPlayer(elongate);
-        drawSnake(&snake);
-        setMainMenu(); */
     }
 
     REG_IF = REG_IF;  // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;   // Re-enable interrupt handling
 }
 
+// function to initialize the game 
 void initalizeGame() {
+
     time++;
     int num = time / 1000;
     checkButton();
 
     // if game is active (1)
-    if (ACTIVE_GAME == 1) {
-        // drawU16(num, 500, 180, 10);
+    if (active_game == 1) {
+
+        /*// drawU16(num, 500, 180, 10);
         movePlayer(&elongate, lastDirection);
         // moveSnake(&snake, elongate.position);
         drawPlayer(elongate);
-        drawSnake(&snake);
+        drawSnake(&snake); */
+        startGame();
 
     // if game is not active (0)
     } else {
         setMainMenu();
     }
-    
-    
+
+}
+
+// function to start the game 
+void startGame() {
+    active_game = 1;
+    // drawU16(num, 500, 180, 10);
+    //checkButton();
+    movePlayer(&elongate, lastDirection);
+    // moveSnake(&snake, elongate.position);
+    drawPlayer(elongate);
+    drawSnake(&snake);
 }
 
 void initializeInterrupts() {
@@ -78,6 +90,8 @@ void checkButton(void) {
 
         // if there is an active game, bring up the pause menu 
         //setPauseMenu();
+        
+        startGame();
     }
     if ((buttons & KEY_B) == KEY_B) {
     }
