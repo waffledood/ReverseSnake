@@ -63,7 +63,9 @@ void startGame() {
     moveSnake(&snake, elongate.position);
 
     if (isPlayerEaten(&snake, &elongate)) {
-        // active_game = 0;
+        active_game = 0;
+        blankScreen();
+        return;
     }
         
     drawPlayer(elongate);
