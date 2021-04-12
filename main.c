@@ -101,6 +101,9 @@ int main(void) {
     elongate = constructPlayer(pos.x, pos.y, 10);
     snake = constructSnake(3, 3, 1);
 
+    // initialize Main Menu
+    setMainMenu();
+
     while (1) {
     }
 
