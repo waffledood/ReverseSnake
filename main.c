@@ -60,7 +60,12 @@ void startGame() {
     //drawU16(num, 500, 180, 10);
     //checkButton();
     movePlayer(&elongate, lastDirection);
-    //moveSnake(&snake, elongate.position);
+    moveSnake(&snake, elongate.position);
+
+    if (isPlayerEaten(&snake, &elongate)) {
+        // active_game = 0;
+    }
+        
     drawPlayer(elongate);
     drawSnake(&snake);
 }
@@ -121,6 +126,20 @@ struct Position randLimit(int lowerLimitX, int lowerLimitY, int upperLimitX, int
     return pos;
 }
 
+int isPlayerEaten(struct Snake* s, struct Player* p) {
+    int i;
+    for (i = 0; i < s->length; i++)
+    {
+        struct Position snakePos = s->body[i];
+
+        if (isPositionEqual(snakePos, p->position) == 1) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 // -----------------------------------------------------------------------------
 // Project Entry Point
 // -----------------------------------------------------------------------------
@@ -132,7 +151,8 @@ int main(void) {
     pos = randLimit(7, 0, 23, 10);
 
     elongate = constructPlayer(pos.x, pos.y, 10);
-    snake = constructSnake(3, 3, 1);
+    snake = constructSnake(3, 3, 5);
+
 
     while (1) {
     }
