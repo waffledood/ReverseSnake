@@ -17,14 +17,29 @@ void drawPlayer(struct Player player);
 void drawSnake(struct Snake *snake);
 struct Position gridToPixelPos(struct Position gridPos);
 
+// pseudo boolean to track the status of the game
+// 0 -> game is not active
+// 1 -> game is active 
 int activeGame = 0;
 
 // Function to enable & set the Main Menu for players
-void setMenu() {
+void setMainMenu() {
     if (activeGame == 0) {
+        // clear out screen 
         blankScreen();
-        // set up Sprites for main menu
+
+        // set up Sprites for main menu 
+        int i;
+        for (i = 0; i < 5; i++) 
+            drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
+
+        //
     }
+}
+
+// Function to enable & set the Pause Menu for players 
+void setPauseMenu() {
+    //
 }
 
 // Function to clear screen of existing sprites

@@ -50,6 +50,12 @@ void checkButton(void) {
 
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
+
+        // if there isn't an active game, bring up the main menu
+        //setMainMenu();
+
+        // if there is an active game, bring up the pause menu 
+        //setPauseMenu();
     }
     if ((buttons & KEY_B) == KEY_B) {
     }

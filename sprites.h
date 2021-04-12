@@ -1,12 +1,12 @@
 #define spriteData  ((unsigned short *) 0x6010000)
 
-#define P 1
+#define P 1  // Purple 
 #define BY 2 // Bright Yellow
 #define LG 3 // Light Green
 #define DG 4 // Dark Green
 #define MG 5 // Medium Green
-#define E 6 // White
-#define R 7 // Red
+#define E 6  // White
+#define R 7  // Red
 
 #define SPRITE_SNAKE_HEAD 0
 #define SPRITE_SNAKE_BODY 1
@@ -42,4 +42,69 @@ unsigned short sprites[] = {
     R,R,R,R,R,R,R,R,
     0,R,R,R,R,R,R,0,
     0,0,R,R,R,R,0,0,
+
+    // 3 51 letter S
+    0,R,R,R,R,R,R,0,
+    R,R,R,R,R,R,R,R,
+    R,R,R,0,0,0,0,0,
+    R,R,R,R,R,R,R,0,
+    0,R,R,R,R,R,R,R,
+    0,0,0,0,0,R,R,R,
+    R,R,R,R,R,R,R,R,
+    0,R,R,R,R,R,R,0,
+
+    // 4 52 letter N
+    R,R,R,0,0,R,R,R,
+    R,R,R,R,0,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,0,R,R,R,R,
+    R,R,R,0,0,R,R,R,
+
+    // 5 53 letter A
+    0,R,R,R,R,R,R,0,
+    R,R,R,R,R,R,R,R,
+    R,R,R,0,0,R,R,R,
+    R,R,R,0,0,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,0,0,R,R,R,
+    R,R,R,0,0,R,R,R,
+
+    // 6 54 letter K
+    R,R,R,0,0,0,R,R,
+    R,R,R,0,0,R,R,R,
+    R,R,R,0,R,R,R,0,
+    R,R,R,R,R,R,0,0,
+    R,R,R,R,R,R,0,0,
+    R,R,R,0,R,R,R,0,
+    R,R,R,0,0,R,R,R,
+    R,R,R,0,0,0,R,R,
+
+    // 7 55 letter E
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+    R,R,R,0,0,0,0,0,
+    R,R,R,R,R,R,0,0,
+    R,R,R,R,R,R,0,0,
+    R,R,R,0,0,0,0,0,
+    R,R,R,R,R,R,R,R,
+    R,R,R,R,R,R,R,R,
+
+
 };
+
+/*
+
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+R,R,R,R,R,R,R,R,
+
+*/
