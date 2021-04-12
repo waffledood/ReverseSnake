@@ -82,17 +82,19 @@ void checkButton(void) {
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
         blankScreen();
-        startGame();
+        active_game = 1;
+        //startGame();
     }
     if ((buttons & KEY_B) == KEY_B) {
     }
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
     }
     if ((buttons & KEY_START) == KEY_START) {
+        // set up "Start" button as the button to return to main menu whilst mid-game
         blankScreen();
         //setMainMenu();
         active_game = 0;
-        initalizeGame();
+        //initalizeGame();
     }
     if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
         lastDirection = RIGHT;
