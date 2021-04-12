@@ -89,6 +89,10 @@ void checkButton(void) {
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
     }
     if ((buttons & KEY_START) == KEY_START) {
+        blankScreen();
+        //setMainMenu();
+        active_game = 0;
+        initalizeGame();
     }
     if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
         lastDirection = RIGHT;
