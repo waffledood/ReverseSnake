@@ -20,18 +20,22 @@ void handler(void) {
     REG_IME = 0x00;  // Stop all other interrupt handling, while we handle this current one
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) {
-        time++;
-        int num = time / 1000;
-        checkButton();
-        // drawU16(num, 500, 180, 10);
-        movePlayer(&elongate, lastDirection);
-        // moveSnake(&snake, elongate.position);
-        drawPlayer(elongate);
-        drawSnake(&snake);
+        initalizeGame();
     }
 
     REG_IF = REG_IF;  // Update interrupt table, to confirm we have handled this interrupt
     REG_IME = 0x01;   // Re-enable interrupt handling
+}
+
+void initalizeGame() {
+    time++;
+    int num = time / 1000;
+    checkButton();
+    // drawU16(num, 500, 180, 10);
+    movePlayer(&elongate, lastDirection);
+    // moveSnake(&snake, elongate.position);
+    drawPlayer(elongate);
+    drawSnake(&snake);
 }
 
 void initializeInterrupts() {
