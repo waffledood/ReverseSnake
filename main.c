@@ -153,7 +153,7 @@ void spawnEntities() {
     snakeSpawn = getRandPos(7, 0, 15, 15);
 
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 10);
-    snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5);
+    snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
 }
 
 // -----------------------------------------------------------------------------
