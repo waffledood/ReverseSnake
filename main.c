@@ -36,8 +36,8 @@ void handler(void) {
 // function to initialize the game 
 void initalizeGame() {
 
-    time++;
-    int num = time / 1000;
+    /*time++;
+    in num = time / 1000; */
     checkButton();
 
     // if game is active (1)
@@ -53,12 +53,14 @@ void initalizeGame() {
 
 // function to start the game 
 void startGame() {
-    //blankScreen();
+    
+    time++;
+    int num = time / 1000;
     active_game = 1;
-    // drawU16(num, 500, 180, 10);
+    //drawU16(num, 500, 180, 10);
     //checkButton();
     movePlayer(&elongate, lastDirection);
-    // moveSnake(&snake, elongate.position);
+    //moveSnake(&snake, elongate.position);
     drawPlayer(elongate);
     drawSnake(&snake);
 }

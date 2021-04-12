@@ -5,19 +5,21 @@
 #define LG 3 // Light Green
 #define DG 4 // Dark Green
 #define MG 5 // Medium Green
-#define E 6  // White
+#define W 6  // White
 #define R 7  // Red
 
 #define SPRITE_SNAKE_HEAD 0
 #define SPRITE_SNAKE_BODY 1
 #define SPRITE_PLAYER 2
+// defines the number of sprites 
+#define SPRITE_NUMB 13
 
 unsigned short sprites[] = {
     // 0 48 snake head 
      0, 0,DG,DG,DG,DG, 0, 0,
      0,DG,DG,LG,LG,DG,DG, 0,
-    DG,MG, E,LG,LG, E,DG,DG,
-    DG,BY, E,LG,LG, E,LG,LG,
+    DG,MG, W,LG,LG, W,DG,DG,
+    DG,BY, W,LG,LG, W,LG,LG,
     DG,LG,LG,LG,LG,LG,LG,DG,
     DG,DG,LG, R, R,LG,LG,DG,
      0,DG,DG, R, R,LG,DG, 0,
@@ -43,6 +45,7 @@ unsigned short sprites[] = {
     0,R,R,R,R,R,R,0,
     0,0,R,R,R,R,0,0,
 
+    // Main Menu Font
     // 3 51 letter S
     0,R,R,R,R,R,R,0,
     R,R,R,R,R,R,R,R,
@@ -93,6 +96,58 @@ unsigned short sprites[] = {
     R,R,R,R,R,R,R,R,
     R,R,R,R,R,R,R,R,
 
+    // Unicode Font 
+    
+    // 8 56 letter S (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,0,W,W,W,W,0,0,
+    0,W,0,0,0,0,W,0,
+    0,0,W,W,0,0,0,0,
+    0,0,0,0,W,W,0,0,
+    0,W,0,0,0,0,W,0,
+    0,0,W,W,W,W,0,0,
+    0,0,0,0,0,0,0,0,
+
+    // 9 57 letter T (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,W,W,W,W,W,W,W,
+    0,0,0,0,W,0,0,0,
+    0,0,0,0,W,0,0,0,
+    0,0,0,0,W,0,0,0,
+    0,0,0,0,W,0,0,0,
+    0,0,0,0,W,0,0,0,
+    0,0,0,0,0,0,0,0,
+
+    // 10 58 letter A (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,0,0,W,W,0,0,0,
+    0,0,0,W,W,0,0,0,
+    0,0,W,0,0,W,0,0,
+    0,W,W,W,W,W,W,0,
+    0,W,0,0,0,0,W,0,
+    0,W,0,0,0,0,W,0,
+    0,0,0,0,0,0,0,0,
+
+    // 11 59 letter R (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,W,W,W,W,W,0,0,
+    0,W,0,0,0,0,W,0,
+    0,W,W,W,W,W,0,0,
+    0,W,0,0,W,0,0,0,
+    0,W,0,0,0,W,0,0,
+    0,W,0,0,0,0,W,0,
+    0,0,0,0,0,0,0,0,
+
+    // 12 60 letter A (Button)
+    R,R,R,R,R,R,R,R,
+    R,0,0,W,W,0,0,R,
+    R,0,0,W,W,0,0,R,
+    R,0,W,0,0,W,0,R,
+    R,0,W,W,W,W,0,R,
+    R,0,W,0,0,W,0,R,
+    R,0,W,0,0,W,0,R,
+    R,R,R,R,R,R,R,R,
+    
 
 };
 
