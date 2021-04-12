@@ -34,24 +34,29 @@ void moveSnake(struct Snake *s, struct Position playerPos) {
         return;
     }
 
+    s->ticksElapsed = 0;
+
     struct Position nextPos;
+    nextPos.x = s->body[0].x;
+    nextPos.y = s->body[0].y;
 
     int diffX = s->body[0].x - playerPos.x;
     int diffY = s->body[0].y - playerPos.y;
 
-    if ((diffX > diffY) || (diffX == diffY)) {
-        if (diffX>0) {
-            nextPos.x = s->body[0].x - 1;
-        } else if (diffX<0) {
-            nextPos.x = s->body[0].x + 1;
+    if ((abs(diffX) >= abs(diffY))) {
+        if (diffX > 0) {
+            nextPos.x -= 1;
+        } else if (diffX < 0) {
+            nextPos.x += 1;
         }
-    } else if (diffX < diffY) {
-        if (diffY>0) {
-            nextPos.y = s->body[0].y - 1;
-        } else if (diffY<0) {
-            nextPos.y = s->body[0].y + 1;
+    } else if (abs(diffX) < abs(diffY)) {
+        if (diffY > 0) {
+            nextPos.y -= 1;
+        } else if (diffY < 0) {
+            nextPos.y += 1;
         }
     }
+
     updateSnakeBody(s, nextPos);
 }
 
@@ -69,4 +74,4 @@ void setSnakeSpeed(struct Snake *s, double speed) {
     s->ticksPerMove = (1 / speed) * 1000;
 }
 
-#endif // __SNAKE_H__
+#endif  // __SNAKE_H__
