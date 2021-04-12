@@ -21,6 +21,14 @@ void handler(void) {
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) {
         initalizeGame();
+        /*
+        time++;
+        int num = time / 1000;
+        checkButton();
+        movePlayer(&elongate, lastDirection);
+        drawPlayer(elongate);
+        drawSnake(&snake);
+        setMainMenu(); */
     }
 
     REG_IF = REG_IF;  // Update interrupt table, to confirm we have handled this interrupt
@@ -31,11 +39,21 @@ void initalizeGame() {
     time++;
     int num = time / 1000;
     checkButton();
-    // drawU16(num, 500, 180, 10);
-    movePlayer(&elongate, lastDirection);
-    // moveSnake(&snake, elongate.position);
-    drawPlayer(elongate);
-    drawSnake(&snake);
+
+    // if game is active (1)
+    if (ACTIVE_GAME == 1) {
+        // drawU16(num, 500, 180, 10);
+        movePlayer(&elongate, lastDirection);
+        // moveSnake(&snake, elongate.position);
+        drawPlayer(elongate);
+        drawSnake(&snake);
+
+    // if game is not active (0)
+    } else {
+        setMainMenu();
+    }
+    
+    
 }
 
 void initializeInterrupts() {
@@ -106,7 +124,7 @@ int main(void) {
     snake = constructSnake(3, 3, 1);
 
     // initialize Main Menu
-    setMainMenu();
+    //setMainMenu();
 
     while (1) {
     }
