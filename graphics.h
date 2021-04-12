@@ -10,6 +10,7 @@
 #define SPRITE_PLAYER_ID 1
 #define SPRITE_SNAKE_ID 2
 
+
 void blankScreen(void);
 void initializeGraphics();
 void drawSprite(int spriteId, int N, int x, int y);
@@ -17,14 +18,31 @@ void drawPlayer(struct Player player);
 void drawSnake(struct Snake *snake);
 struct Position gridToPixelPos(struct Position gridPos);
 
-int activeGame = 0;
 
 // Function to enable & set the Main Menu for players
-void setMenu() {
-    if (activeGame == 0) {
-        blankScreen();
-        // set up Sprites for main menu
-    }
+void setMainMenu() {
+
+    // clear out screen 
+    //blankScreen();
+
+    // set up Sprites for main menu 
+    int i;
+    // draw "Snake" title
+    for (i = 0; i < 5; i++) 
+        drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
+
+    // draw "A" button
+    drawSprite(12, 15, 90, 120/2 + 20);
+    // draw "START" option
+    for (i = 0; i < 4; i++)
+        drawSprite(8 + i, 16 + i, 100 + (i * 8), 120/2 + 20);
+    drawSprite(9, 20, 132, 120/2 + 20);
+
+}
+
+// Function to enable & set the Pause Menu for players 
+void setPauseMenu() {
+    //
 }
 
 // Function to clear screen of existing sprites
@@ -59,7 +77,7 @@ void initializeGraphics() {
     *(unsigned short *)0x500020E = RGB(31, 0, 0);
 
     // Fill SpriteData
-    for (i = 0; i < 10 * 8 * 8 / 2; i++)
+    for (i = 0; i < SPRITE_NUMB * 8 * 8 / 2; i++)
         spriteData[i] = (sprites[i * 2 + 1] << 8) + sprites[i * 2];
     for (i = 0; i < 128; i++)
         drawSprite(0, i, 240, 160);
