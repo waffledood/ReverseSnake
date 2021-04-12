@@ -12,13 +12,18 @@ struct Snake {
     int ticksElapsed;
 };
 
-struct Snake constructSnake(int x, int y, double speed) {
+struct Snake constructSnake(int x, int y, double speed, int length) {
     struct Snake snake;
     snake.body[0].x = x;
     snake.body[0].y = y;
     snake.length = 1;
     snake.ticksElapsed = 0;
     setSnakeSpeed(&snake, speed);
+
+    int i;
+    for (i = 0; i < length - 1; i++) {
+        growSnake(&snake);
+    }
 
     return snake;
 }
