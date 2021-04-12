@@ -42,12 +42,6 @@ void initalizeGame() {
 
     // if game is active (1)
     if (active_game == 1) {
-
-        /*// drawU16(num, 500, 180, 10);
-        movePlayer(&elongate, lastDirection);
-        // moveSnake(&snake, elongate.position);
-        drawPlayer(elongate);
-        drawSnake(&snake); */
         startGame();
 
     // if game is not active (0)
@@ -59,6 +53,7 @@ void initalizeGame() {
 
 // function to start the game 
 void startGame() {
+    //blankScreen();
     active_game = 1;
     // drawU16(num, 500, 180, 10);
     //checkButton();
@@ -84,13 +79,7 @@ void checkButton(void) {
 
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
-
-        // if there isn't an active game, bring up the main menu
-        //setMainMenu();
-
-        // if there is an active game, bring up the pause menu 
-        //setPauseMenu();
-        
+        blankScreen();
         startGame();
     }
     if ((buttons & KEY_B) == KEY_B) {
@@ -136,9 +125,6 @@ int main(void) {
 
     elongate = constructPlayer(pos.x, pos.y, 10);
     snake = constructSnake(3, 3, 1);
-
-    // initialize Main Menu
-    //setMainMenu();
 
     while (1) {
     }
