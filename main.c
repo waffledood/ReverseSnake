@@ -62,6 +62,7 @@ void initalizeGame() {
 
 // function to start the game
 void startGame() {
+
     time++;
     int num = time / 1000;
     //drawU16(num, 500, 180, 10);
@@ -71,14 +72,15 @@ void startGame() {
 
     // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
+        
         gameState = GAME_INACTIVE;
         blankScreen();
         spawnEntities();
         return;
     
-    // if player reaches endGoal, increase difficulty
-    } else if (1 == 0) {
-        //
+    // if player reaches endGoal, increase difficulty 
+    } else if (isPositionEqual(player.position, endGoal)) {
+        //blankScreen();
     }
 
     drawPlayer(player);
