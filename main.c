@@ -8,13 +8,22 @@
 #include "snake.h"
 
 #define TICKS_PER_MILLISECOND 16781
-#define PLAYER_ID 1
+// #define PLAYER_ID 1
+
+#define GAME_INACTIVE 0
+#define GAME_PAUSE 1
+#define GAME_ACTIVE 2
+
+#define MODE_NORMAL 0
+#define MODE_HARD 1
 
 // pseudo boolean to track the status of the game
 // 0 -> game is not active
 // 1 -> game is active 
-//#define ACTIVE_GAME 0
-int active_game = 0;
+//#define gameState 0
+
+int gameState = GAME_INACTIVE;
+int gameMode = MODE_NORMAL;
 
 enum DIRECTION lastDirection = NONE;
 struct Player player;
@@ -40,15 +49,13 @@ void initalizeGame() {
     in num = time / 1000; */
     checkButton();
 
-    // if game is active (1)
-    if (active_game == 1) {
+    if (gameState == GAME_PAUSE) {
+        return;
+    } else if (gameState == GAME_ACTIVE) {
         startGame();
-
-    // if game is not active (0)
     } else {
         setMainMenu();
     }
-
 }
 
 // function to start the game 
@@ -56,14 +63,13 @@ void startGame() {
     
     time++;
     int num = time / 1000;
-    active_game = 1;
     //drawU16(num, 500, 180, 10);
     //checkButton();
     movePlayer(&player, lastDirection);
     moveSnake(&snake, player.position);
 
     if (isPlayerEaten(&snake, &player)) {
-        active_game = 0;
+        gameState = GAME_INACTIVE;
         blankScreen();
         spawnEntities();
         return;
@@ -89,22 +95,28 @@ void checkButton(void) {
 
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
-        if (active_game == 0) {
+        if (gameState == GAME_INACTIVE) {
             blankScreen();
-            active_game = 1;
+            gameMode = MODE_NORMAL;
         }
         //startGame();
     }
     if ((buttons & KEY_B) == KEY_B) {
+        if (gameState == GAME_INACTIVE) {
+            blankScreen();
+            gameMode = MODE_HARD;
+        }
     }
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
     }
     if ((buttons & KEY_START) == KEY_START) {
         // set up "Start" button as the button to return to main menu whilst mid-game
-        blankScreen();
-        //setMainMenu();
-        active_game = 0;
-        //initalizeGame();
+        if (gameState == GAME_ACTIVE) {
+            blankScreen();
+            gameState = GAME_PAUSE;
+        } else if (gameState == GAME_PAUSE) {
+            gameState = GAME_ACTIVE;
+        }
     }
     if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
         lastDirection = RIGHT;
