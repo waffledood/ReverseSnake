@@ -32,7 +32,7 @@ void growSnake(struct Snake *s) {
     if (s->length >= MAX_SNAKE_LENGTH) {
         return;
     }
-    
+
     s->body[s->length] = s->body[s->length - 1];
     s->length++;
 }
@@ -80,7 +80,7 @@ void updateSnakeBody(struct Snake *s, struct Position newPos) {
 }
 
 void setSnakeSpeed(struct Snake *s, double speed) {
-    s->ticksPerMove = (1 / speed) * 1000;
+    s->ticksPerMove = (1 / speed) * GAME_UPDATE_HZ;
 }
 
 #endif  // __SNAKE_H__

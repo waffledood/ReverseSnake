@@ -51,7 +51,7 @@ void movePlayer(struct Player* p, enum DIRECTION dir) {
 }
 
 void setPlayerSpeed(struct Player* p, double speed) {
-    p->ticksPerMove = (1 / speed) * 1000;
+    p->ticksPerMove = (1 / speed) * GAME_UPDATE_HZ;
 }
 
 struct Position getPlayerPosition(struct Player p) {

@@ -6,25 +6,33 @@
 #include "graphics.h"
 #include "player.h"
 #include "snake.h"
+#include "gameStatus.h"
 
 #define TICKS_PER_MILLISECOND 16781
-// #define PLAYER_ID 1
 
-#define GAME_INACTIVE 0
-#define GAME_PAUSE 1
-#define GAME_INITIALIZE 2
-#define GAME_ACTIVE 3
+#define SPAWN_PLAYER_X_MIN 15
+#define SPAWN_PLAYER_Y_MIN 0
+#define SPAWN_PLAYER_X_MAX 23
+#define SPAWN_PLAYER_Y_MAX 5
 
-#define MODE_NORMAL 0
-#define MODE_HARD 1
+#define SPAWN_SNAKE_X_MIN 3
+#define SPAWN_SNAKE_Y_MIN 6
+#define SPAWN_SNAKE_X_MAX 20
+#define SPAWN_SNAKE_Y_MAX 9
 
-// pseudo boolean to track the status of the game
-// 0 -> game is not active
-// 1 -> game is active
-//#define gameState 0
+#define SPAWN_GOAL_X_MIN 0
+#define SPAWN_GOAL_Y_MIN 10
+#define SPAWN_GOAL_X_MAX 8
+#define SPAWN_GOAL_Y_MAX 15
 
-int gameState = GAME_INACTIVE;
-int gameMode = MODE_NORMAL;
+#define BASE_SNAKE_LENGTH 5
+#define BASE_SNAKE_SPEED 5
+#define NORMAL_SPEED_GROWTH_RATE 0.1
+#define HARD_SPEED_GROWTH_RATE 0.2
+
+// pseudo boolean to track the state of the game
+enum GAME_STATE gameState = GAME_INACTIVE;
+enum GAME_MODE gameMode = MODE_NORMAL;
 
 enum DIRECTION lastDirection = NONE;
 struct Player player;
@@ -68,26 +76,21 @@ void initalizeGame() {
 // function to start the game
 void startGame() {
     time++;
-    int num = time / 1000;
-    //drawU16(num, 500, 180, 10);
-    //checkButton();
     movePlayer(&player, lastDirection);
     moveSnake(&snake, player.position);
 
     // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
         gameState = GAME_INACTIVE;
-        stage = 1; // reset stage
+        stage = 1;  // reset stage
         blankScreen();
         return;
 
         // if player reaches endGoal, increase stage
     } else if (isPositionEqual(player.position, endGoal)) {
-        // gameState = GAME_INACTIVE;
         gameState = GAME_INITIALIZE;
         stage++;
         blankScreen();
-        // spawnEntities();
         return;  //blankScreen();
     }
 
@@ -110,13 +113,11 @@ void initializeInterrupts() {
 void checkButton(void) {
     u16 buttons = INPUT;
 
-    //
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_NORMAL;
-            // gameState = GAME_ACTIVE;
             gameState = GAME_INITIALIZE;
         }
         //startGame();
@@ -186,17 +187,30 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 }
 
 void spawnEntities() {
-    struct Position playerSpawn = getRandPos(7, 0, 23, 10);
-    struct Position snakeSpawn = getRandPos(7, 0, 15, 15);
+    struct Position playerSpawn = getRandPos(SPAWN_PLAYER_X_MIN,
+                                             SPAWN_PLAYER_Y_MIN,
+                                             SPAWN_PLAYER_X_MAX,
+                                             SPAWN_PLAYER_Y_MAX);
 
-    endGoal = getRandPos(0, 7, 12, 15);
+    struct Position snakeSpawn = getRandPos(SPAWN_SNAKE_X_MIN,
+                                            SPAWN_SNAKE_Y_MIN,
+                                            SPAWN_SNAKE_X_MAX,
+                                            SPAWN_SNAKE_Y_MAX);
+
+    endGoal = getRandPos(SPAWN_GOAL_X_MIN,
+                         SPAWN_GOAL_Y_MIN,
+                         SPAWN_GOAL_X_MAX,
+                         SPAWN_GOAL_Y_MAX);
+
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 8);
 
     if (gameMode == MODE_HARD) {
-        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5 + stage * 0.2, stage);
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y,
+                               BASE_SNAKE_SPEED + stage * HARD_SPEED_GROWTH_RATE, BASE_SNAKE_LENGTH + stage);
 
     } else if (gameMode == MODE_NORMAL) {
-        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 6 + stage * 0.1, 5);
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y,
+                               BASE_SNAKE_SPEED + stage * NORMAL_SPEED_GROWTH_RATE, BASE_SNAKE_LENGTH);
     }
 }
 
