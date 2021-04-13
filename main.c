@@ -8,7 +8,6 @@
 #include "snake.h"
 
 #define TICKS_PER_MILLISECOND 16781
-// #define PLAYER_ID 1
 
 #define GAME_INACTIVE 0
 #define GAME_PAUSE 1
@@ -38,11 +37,7 @@
 #define NORMAL_SPEED_GROWTH_RATE 0.1
 #define HARD_SPEED_GROWTH_RATE 0.2
 
-// pseudo boolean to track the status of the game
-// 0 -> game is not active
-// 1 -> game is active
-//#define gameState 0
-
+// pseudo boolean to track the state of the game
 int gameState = GAME_INACTIVE;
 int gameMode = MODE_NORMAL;
 
@@ -88,9 +83,6 @@ void initalizeGame() {
 // function to start the game
 void startGame() {
     time++;
-    // int num = time / 1000;
-    //drawU16(num, 500, 180, 10);
-    //checkButton();
     movePlayer(&player, lastDirection);
     moveSnake(&snake, player.position);
 
@@ -103,11 +95,9 @@ void startGame() {
 
         // if player reaches endGoal, increase stage
     } else if (isPositionEqual(player.position, endGoal)) {
-        // gameState = GAME_INACTIVE;
         gameState = GAME_INITIALIZE;
         stage++;
         blankScreen();
-        // spawnEntities();
         return;  //blankScreen();
     }
 
@@ -130,13 +120,11 @@ void initializeInterrupts() {
 void checkButton(void) {
     u16 buttons = INPUT;
 
-    //
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_NORMAL;
-            // gameState = GAME_ACTIVE;
             gameState = GAME_INITIALIZE;
         }
         //startGame();
