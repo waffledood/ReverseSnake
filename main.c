@@ -29,10 +29,8 @@ int gameMode = MODE_NORMAL;
 
 enum DIRECTION lastDirection = NONE;
 struct Player player;
-// struct Snake snake;
+struct Snake snake;
 struct Position endGoal;
-struct Snake snakes[MAX_SNAKE_NUM];
-int numSnakes = 0;
 
 unsigned time = 0;
 
@@ -72,14 +70,8 @@ void startGame() {
     //drawU16(num, 500, 180, 10);
     //checkButton();
     movePlayer(&player, lastDirection);
-    // moveSnake(&snake, player.position);
+    moveSnake(&snake, player.position);
 
-    int i;
-    for (i = 0; i < numSnakes; i++) {
-        struct Snake snake = snakes[i];
-        moveSnake(&snake, player.position);
-    }
-    
     // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
         
@@ -97,11 +89,7 @@ void startGame() {
     }
 
     drawPlayer(player);
-    // drawSnake(&snake);
-    for (i = 0; i < numSnakes; i++) {
-        struct Snake snake = snakes[i];
-        drawSnake(&snake);
-    }
+    drawSnake(&snake);
     drawEndGoal(&endGoal);
 }
 
@@ -195,25 +183,18 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 void spawnEntities() {
     struct Position playerSpawn;
     struct Position snakeSpawn;
-    //struct Position endGoal;
 
     playerSpawn = getRandPos(7, 0, 23, 10);
-    // snakeSpawn = getRandPos(7, 0, 15, 15);
+    snakeSpawn = getRandPos(7, 0, 15, 15);
     endGoal = getRandPos(0, 7, 12, 15);
 
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 10);
-    // snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
+    snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
 
     if(gameMode == MODE_HARD) {
-        numSnakes = 3;
     } else if(gameMode == MODE_NORMAL) {
-        numSnakes = 1;
     }
 
-    for (int i = 0; i < numSnakes; i++) {
-        snakeSpawn = getRandPos(7, 0, 15, 15);
-        snakes[i] = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
-    }
 }
 
 // -----------------------------------------------------------------------------
