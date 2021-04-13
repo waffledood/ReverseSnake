@@ -12,12 +12,11 @@
 
 #define GAME_INACTIVE 0
 #define GAME_PAUSE 1
-#define GAME_ACTIVE 2
+#define GAME_INITIALIZE 2
+#define GAME_ACTIVE 3
 
 #define MODE_NORMAL 0
 #define MODE_HARD 1
-
-#define MAX_SNAKE_NUM 5
 
 // pseudo boolean to track the status of the game
 // 0 -> game is not active
@@ -32,6 +31,7 @@ struct Player player;
 struct Snake snake;
 struct Position endGoal;
 
+int stage = 1;
 unsigned time = 0;
 
 void handler(void) {
@@ -51,7 +51,10 @@ void initalizeGame() {
     in num = time / 1000; */
     checkButton();
 
-    if (gameState == GAME_PAUSE) {
+    if (gameState == GAME_INITIALIZE) {
+        spawnEntities();
+        gameState = GAME_ACTIVE;
+    } else if (gameState == GAME_PAUSE) {
         //return;
         //setPauseMenu();
         setMainMenu();
@@ -64,7 +67,6 @@ void initalizeGame() {
 
 // function to start the game
 void startGame() {
-
     time++;
     int num = time / 1000;
     //drawU16(num, 500, 180, 10);
@@ -74,18 +76,19 @@ void startGame() {
 
     // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
-        
         gameState = GAME_INACTIVE;
+        stage = 1; // reset stage
         blankScreen();
-        spawnEntities();
         return;
-    
-    // if player reaches endGoal, increase difficulty 
+
+        // if player reaches endGoal, increase stage
     } else if (isPositionEqual(player.position, endGoal)) {
-        gameState = GAME_INACTIVE;
+        // gameState = GAME_INACTIVE;
+        gameState = GAME_INITIALIZE;
+        stage++;
         blankScreen();
-        spawnEntities();
-        return;       //blankScreen();
+        // spawnEntities();
+        return;  //blankScreen();
     }
 
     drawPlayer(player);
@@ -107,13 +110,14 @@ void initializeInterrupts() {
 void checkButton(void) {
     u16 buttons = INPUT;
 
-    // 
+    //
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_NORMAL;
-            gameState = GAME_ACTIVE;
+            // gameState = GAME_ACTIVE;
+            gameState = GAME_INITIALIZE;
         }
         //startGame();
     }
@@ -122,7 +126,8 @@ void checkButton(void) {
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_HARD;
-            gameState = GAME_ACTIVE;
+            // gameState = GAME_ACTIVE;
+            gameState = GAME_INITIALIZE;
         }
     }
 
@@ -181,20 +186,18 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 }
 
 void spawnEntities() {
-    struct Position playerSpawn;
-    struct Position snakeSpawn;
+    struct Position playerSpawn = getRandPos(7, 0, 23, 10);
+    struct Position snakeSpawn = getRandPos(7, 0, 15, 15);
 
-    playerSpawn = getRandPos(7, 0, 23, 10);
-    snakeSpawn = getRandPos(7, 0, 15, 15);
     endGoal = getRandPos(0, 7, 12, 15);
+    player = constructPlayer(playerSpawn.x, playerSpawn.y, 8);
 
-    player = constructPlayer(playerSpawn.x, playerSpawn.y, 10);
-    snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
+    if (gameMode == MODE_HARD) {
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5 + stage * 0.2, stage);
 
-    if(gameMode == MODE_HARD) {
-    } else if(gameMode == MODE_NORMAL) {
+    } else if (gameMode == MODE_NORMAL) {
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 6 + stage * 0.1, 5);
     }
-
 }
 
 // -----------------------------------------------------------------------------
@@ -203,7 +206,6 @@ void spawnEntities() {
 int main(void) {
     initializeGraphics();
     initializeInterrupts();
-    spawnEntities();
 
     while (1) {
     }
