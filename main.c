@@ -33,6 +33,11 @@
 #define SPAWN_GOAL_X_MAX 8
 #define SPAWN_GOAL_Y_MAX 15
 
+#define BASE_SNAKE_LENGTH 5
+#define BASE_SNAKE_SPEED 5
+#define NORMAL_SPEED_GROWTH_RATE 0.1
+#define HARD_SPEED_GROWTH_RATE 0.2
+
 // pseudo boolean to track the status of the game
 // 0 -> game is not active
 // 1 -> game is active
@@ -210,7 +215,7 @@ void spawnEntities() {
                                             SPAWN_SNAKE_Y_MIN,
                                             SPAWN_SNAKE_X_MAX,
                                             SPAWN_SNAKE_Y_MAX);
-                                            
+
     endGoal = getRandPos(SPAWN_GOAL_X_MIN,
                          SPAWN_GOAL_Y_MIN,
                          SPAWN_GOAL_X_MAX,
@@ -219,10 +224,12 @@ void spawnEntities() {
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 8);
 
     if (gameMode == MODE_HARD) {
-        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5 + stage * 0.2, stage + 1);
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y,
+                               BASE_SNAKE_SPEED + stage * HARD_SPEED_GROWTH_RATE, BASE_SNAKE_LENGTH + stage);
 
     } else if (gameMode == MODE_NORMAL) {
-        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 6 + stage * 0.1, 5);
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y,
+                               BASE_SNAKE_SPEED + stage * NORMAL_SPEED_GROWTH_RATE, BASE_SNAKE_LENGTH);
     }
 }
 
