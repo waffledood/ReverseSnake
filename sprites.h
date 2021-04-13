@@ -11,8 +11,9 @@
 #define SPRITE_SNAKE_HEAD 0
 #define SPRITE_SNAKE_BODY 1
 #define SPRITE_PLAYER 2
+#define SPRITE_END_GOAL 14
 // defines the number of sprites 
-#define SPRITE_NUMB 13
+#define SPRITE_NUMB 14
 
 unsigned short sprites[] = {
     // 0 48 snake head 
@@ -147,7 +148,15 @@ unsigned short sprites[] = {
     R,0,W,0,0,W,0,R,
     R,0,W,0,0,W,0,R,
     R,R,R,R,R,R,R,R,
-    
+
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
+    W,W,W,W,W,W,W,W,
 
 };
 

@@ -148,9 +148,11 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 void spawnEntities() {
     struct Position playerSpawn;
     struct Position snakeSpawn;
+    struct Position endGoal;
 
     playerSpawn = getRandPos(7, 0, 23, 10);
     snakeSpawn = getRandPos(7, 0, 15, 15);
+    endGoal = getRandPos(0, 7, 12, 15);
 
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 10);
     snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5, 5);
