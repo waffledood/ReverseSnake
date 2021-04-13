@@ -149,6 +149,18 @@ unsigned short sprites[] = {
     R,0,W,0,0,W,0,R,
     R,R,R,R,R,R,R,R,
 
+    // 13 61 letter L (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,W,W,W,W,W,0,
+    0,0,0,0,0,0,0,0,
+    
+
+    // 14 62 endGoal for player
     W,W,W,W,W,W,W,W,
     W,W,W,W,W,W,W,W,
     W,W,W,W,W,W,W,W,
