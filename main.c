@@ -19,7 +19,7 @@
 
 // pseudo boolean to track the status of the game
 // 0 -> game is not active
-// 1 -> game is active 
+// 1 -> game is active
 //#define gameState 0
 
 int gameState = GAME_INACTIVE;
@@ -42,9 +42,8 @@ void handler(void) {
     REG_IME = 0x01;   // Re-enable interrupt handling
 }
 
-// function to initialize the game 
+// function to initialize the game
 void initalizeGame() {
-
     /*time++;
     in num = time / 1000; */
     checkButton();
@@ -58,9 +57,8 @@ void initalizeGame() {
     }
 }
 
-// function to start the game 
+// function to start the game
 void startGame() {
-    
     time++;
     int num = time / 1000;
     //drawU16(num, 500, 180, 10);
@@ -74,7 +72,7 @@ void startGame() {
         spawnEntities();
         return;
     }
-        
+
     drawPlayer(player);
     drawSnake(&snake);
 }
@@ -108,13 +106,14 @@ void checkButton(void) {
         }
     }
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
-    }
-    if ((buttons & KEY_START) == KEY_START) {
-        // set up "Start" button as the button to return to main menu whilst mid-game
+        // set up "Select" button as the button to pause the game
         if (gameState == GAME_ACTIVE) {
             blankScreen();
             gameState = GAME_PAUSE;
-        } else if (gameState == GAME_PAUSE) {
+        }
+    }
+    if ((buttons & KEY_START) == KEY_START) {
+        if (gameState == GAME_PAUSE) {
             gameState = GAME_ACTIVE;
         }
     }
@@ -145,8 +144,7 @@ struct Position getRandPos(int lowerLimitX, int lowerLimitY, int upperLimitX, in
 
 int isPlayerEaten(struct Snake* s, struct Player* p) {
     int i;
-    for (i = 0; i < s->length; i++)
-    {
+    for (i = 0; i < s->length; i++) {
         struct Position snakePos = s->body[i];
 
         if (isPositionEqual(snakePos, p->position) == 1) {
