@@ -1,6 +1,7 @@
 #ifndef __MOTION_H__
 #define __MOTION_H__
 
+#define GAME_UPDATE_HZ 1000
 #define GRID_CELL_SIZE 10
 #define GRID_MAX_X 23
 #define GRID_MAX_Y 15
