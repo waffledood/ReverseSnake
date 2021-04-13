@@ -38,6 +38,9 @@ void setMainMenu() {
         drawSprite(8 + i, 16 + i, 100 + (i * 8), 120/2 + 20);
     drawSprite(9, 20, 132, 120/2 + 20);
 
+    //
+    //drawEndGoal();
+
 }
 
 // Function to enable & set the Pause Menu for players 
@@ -102,6 +105,12 @@ void drawSnake(struct Snake *snake) {
         struct Position pixelPos = gridToPixelPos(snake->body[i]);
         drawSprite(SPRITE_SNAKE_BODY, i + SPRITE_SNAKE_ID, pixelPos.x, pixelPos.y);
     }
+}
+
+void drawEndGoal(struct Position *endGoal) {
+    struct Position pixelPos = gridToPixelPos(*endGoal);
+    //drawSprite(SPRITE_END_GOAL, 99 ,pixelPos.x, pixelPos.y);
+    drawSprite(16, 99, pixelPos.x, pixelPos.y);
 }
 
 struct Position gridToPixelPos(struct Position gridPos) {

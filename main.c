@@ -28,6 +28,7 @@ int gameMode = MODE_NORMAL;
 enum DIRECTION lastDirection = NONE;
 struct Player player;
 struct Snake snake;
+struct Position endGoal;
 
 unsigned time = 0;
 
@@ -68,15 +69,21 @@ void startGame() {
     movePlayer(&player, lastDirection);
     moveSnake(&snake, player.position);
 
+    // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
         gameState = GAME_INACTIVE;
         blankScreen();
         spawnEntities();
         return;
+    
+    // if player reaches endGoal, increase difficulty
+    } else if (1 == 0) {
+        //
     }
 
     drawPlayer(player);
     drawSnake(&snake);
+    drawEndGoal(&endGoal);
 }
 
 void initializeInterrupts() {
@@ -103,6 +110,7 @@ void checkButton(void) {
         }
         //startGame();
     }
+
     if ((buttons & KEY_B) == KEY_B) {
         if (gameState == GAME_INACTIVE) {
             blankScreen();
@@ -168,7 +176,7 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 void spawnEntities() {
     struct Position playerSpawn;
     struct Position snakeSpawn;
-    struct Position endGoal;
+    //struct Position endGoal;
 
     playerSpawn = getRandPos(7, 0, 23, 10);
     snakeSpawn = getRandPos(7, 0, 15, 15);
