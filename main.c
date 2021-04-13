@@ -18,6 +18,21 @@
 #define MODE_NORMAL 0
 #define MODE_HARD 1
 
+#define SPAWN_PLAYER_X_MIN 15
+#define SPAWN_PLAYER_Y_MIN 0
+#define SPAWN_PLAYER_X_MAX 23
+#define SPAWN_PLAYER_Y_MAX 5
+
+#define SPAWN_SNAKE_X_MIN 3
+#define SPAWN_SNAKE_Y_MIN 6
+#define SPAWN_SNAKE_X_MAX 20
+#define SPAWN_SNAKE_Y_MAX 9
+
+#define SPAWN_GOAL_X_MIN 0
+#define SPAWN_GOAL_Y_MIN 10
+#define SPAWN_GOAL_X_MAX 8
+#define SPAWN_GOAL_Y_MAX 15
+
 // pseudo boolean to track the status of the game
 // 0 -> game is not active
 // 1 -> game is active
@@ -68,7 +83,7 @@ void initalizeGame() {
 // function to start the game
 void startGame() {
     time++;
-    int num = time / 1000;
+    // int num = time / 1000;
     //drawU16(num, 500, 180, 10);
     //checkButton();
     movePlayer(&player, lastDirection);
@@ -77,7 +92,7 @@ void startGame() {
     // if player dies, return to Main Menu
     if (isPlayerEaten(&snake, &player)) {
         gameState = GAME_INACTIVE;
-        stage = 1; // reset stage
+        stage = 1;  // reset stage
         blankScreen();
         return;
 
@@ -186,14 +201,25 @@ int isPlayerEaten(struct Snake* s, struct Player* p) {
 }
 
 void spawnEntities() {
-    struct Position playerSpawn = getRandPos(7, 0, 23, 10);
-    struct Position snakeSpawn = getRandPos(7, 0, 15, 15);
+    struct Position playerSpawn = getRandPos(SPAWN_PLAYER_X_MIN,
+                                             SPAWN_PLAYER_Y_MIN,
+                                             SPAWN_PLAYER_X_MAX,
+                                             SPAWN_PLAYER_Y_MAX);
 
-    endGoal = getRandPos(0, 7, 12, 15);
+    struct Position snakeSpawn = getRandPos(SPAWN_SNAKE_X_MIN,
+                                            SPAWN_SNAKE_Y_MIN,
+                                            SPAWN_SNAKE_X_MAX,
+                                            SPAWN_SNAKE_Y_MAX);
+                                            
+    endGoal = getRandPos(SPAWN_GOAL_X_MIN,
+                         SPAWN_GOAL_Y_MIN,
+                         SPAWN_GOAL_X_MAX,
+                         SPAWN_GOAL_Y_MAX);
+
     player = constructPlayer(playerSpawn.x, playerSpawn.y, 8);
 
     if (gameMode == MODE_HARD) {
-        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5 + stage * 0.2, stage);
+        snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 5 + stage * 0.2, stage + 1);
 
     } else if (gameMode == MODE_NORMAL) {
         snake = constructSnake(snakeSpawn.x, snakeSpawn.y, 6 + stage * 0.1, 5);
