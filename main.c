@@ -90,7 +90,10 @@ void startGame() {
     
     // if player reaches endGoal, increase difficulty 
     } else if (isPositionEqual(player.position, endGoal)) {
-        //blankScreen();
+        gameState = GAME_INACTIVE;
+        blankScreen();
+        spawnEntities();
+        return;       //blankScreen();
     }
 
     drawPlayer(player);
