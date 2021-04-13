@@ -49,7 +49,9 @@ void initalizeGame() {
     checkButton();
 
     if (gameState == GAME_PAUSE) {
-        return;
+        //return;
+        //setPauseMenu();
+        setMainMenu();
     } else if (gameState == GAME_ACTIVE) {
         startGame();
     } else {
@@ -91,11 +93,13 @@ void initializeInterrupts() {
 void checkButton(void) {
     u16 buttons = INPUT;
 
+    // 
     if ((buttons & KEY_A) == KEY_A) {
         // set up Key A as the button to start the game (from the main menu)
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_NORMAL;
+            gameState = GAME_ACTIVE;
         }
         //startGame();
     }
@@ -103,8 +107,11 @@ void checkButton(void) {
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_HARD;
+            gameState = GAME_ACTIVE;
         }
     }
+
+    // KEY_SELECT (backspace) -> pause game whilst mid-game
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
         // set up "Select" button as the button to pause the game
         if (gameState == GAME_ACTIVE) {
@@ -112,8 +119,11 @@ void checkButton(void) {
             gameState = GAME_PAUSE;
         }
     }
+
+    // KEY_START (enter) -> resume game whilst mid-game
     if ((buttons & KEY_START) == KEY_START) {
         if (gameState == GAME_PAUSE) {
+            blankScreen();
             gameState = GAME_ACTIVE;
         }
     }

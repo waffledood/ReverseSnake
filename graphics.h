@@ -32,7 +32,7 @@ void setMainMenu() {
         drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
 
     // draw "A" button
-    drawSprite(12, 15, 90, 120/2 + 20);
+    drawSprite(16, 15, 90, 120/2 + 20);
     // draw "START" option
     for (i = 0; i < 4; i++)
         drawSprite(8 + i, 16 + i, 100 + (i * 8), 120/2 + 20);
@@ -42,7 +42,7 @@ void setMainMenu() {
 
 // Function to enable & set the Pause Menu for players 
 void setPauseMenu() {
-    //
+    //TODO
 }
 
 // Function to clear screen of existing sprites
@@ -77,7 +77,7 @@ void initializeGraphics() {
     *(unsigned short *)0x500020E = RGB(31, 0, 0);
 
     // Fill SpriteData
-    for (i = 0; i < SPRITE_NUMB * 8 * 8 / 2; i++)
+    for (i = 0; i < 128 * 8 * 8 / 2; i++)
         spriteData[i] = (sprites[i * 2 + 1] << 8) + sprites[i * 2];
     for (i = 0; i < 128; i++)
         drawSprite(0, i, 240, 160);
