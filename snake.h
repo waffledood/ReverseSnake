@@ -29,6 +29,10 @@ struct Snake constructSnake(int x, int y, double speed, int length) {
 }
 
 void growSnake(struct Snake *s) {
+    if (s->length >= MAX_SNAKE_LENGTH) {
+        return;
+    }
+    
     s->body[s->length] = s->body[s->length - 1];
     s->length++;
 }
