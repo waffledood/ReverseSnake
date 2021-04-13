@@ -6,16 +6,9 @@
 #include "graphics.h"
 #include "player.h"
 #include "snake.h"
+#include "gameStatus.h"
 
 #define TICKS_PER_MILLISECOND 16781
-
-#define GAME_INACTIVE 0
-#define GAME_PAUSE 1
-#define GAME_INITIALIZE 2
-#define GAME_ACTIVE 3
-
-#define MODE_NORMAL 0
-#define MODE_HARD 1
 
 #define SPAWN_PLAYER_X_MIN 15
 #define SPAWN_PLAYER_Y_MIN 0
@@ -38,8 +31,8 @@
 #define HARD_SPEED_GROWTH_RATE 0.2
 
 // pseudo boolean to track the state of the game
-int gameState = GAME_INACTIVE;
-int gameMode = MODE_NORMAL;
+enum GAME_STATE gameState = GAME_INACTIVE;
+enum GAME_MODE gameMode = MODE_NORMAL;
 
 enum DIRECTION lastDirection = NONE;
 struct Player player;
