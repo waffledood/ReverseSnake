@@ -22,30 +22,35 @@ struct Position gridToPixelPos(struct Position gridPos);
 // Function to enable & set the Main Menu for players
 void setMainMenu() {
 
-    // clear out screen 
-    //blankScreen();
-
     // set up Sprites for main menu 
     int i;
+
     // draw "Snake" title
-    for (i = 0; i < 5; i++) 
+    for (i = 0; i < 5; i++) {
         drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
+    }
 
     // draw "A" button
-    drawSprite(16, 15, 90, 120/2 + 20);
+    drawSprite(12, 15, 90, 120/2 + 20);
+
     // draw "START" option
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         drawSprite(8 + i, 16 + i, 100 + (i * 8), 120/2 + 20);
+    }
     drawSprite(9, 20, 132, 120/2 + 20);
-
-    //
-    //drawEndGoal();
-
+    
 }
 
 // Function to enable & set the Pause Menu for players 
 void setPauseMenu() {
-    //TODO
+
+    int i;
+    int pause_menu[] = {16, 10, 17, 8, 15};
+
+    for (i = 0; i < 5; i++) {
+        drawSprite(pause_menu[i], 21+i, 100 + (i * 10), 120/2);
+    }
+
 }
 
 // Function to clear screen of existing sprites
@@ -110,7 +115,7 @@ void drawSnake(struct Snake *snake) {
 void drawEndGoal(struct Position *endGoal) {
     struct Position pixelPos = gridToPixelPos(*endGoal);
     //drawSprite(SPRITE_END_GOAL, 99 ,pixelPos.x, pixelPos.y);
-    drawSprite(16, 99, pixelPos.x, pixelPos.y);
+    drawSprite(18, 99, pixelPos.x, pixelPos.y);
 }
 
 struct Position gridToPixelPos(struct Position gridPos) {

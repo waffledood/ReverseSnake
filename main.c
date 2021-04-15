@@ -63,9 +63,7 @@ void initalizeGame() {
         spawnEntities();
         gameState = GAME_ACTIVE;
     } else if (gameState == GAME_PAUSE) {
-        //return;
-        //setPauseMenu();
-        setMainMenu();
+        setPauseMenu();
     } else if (gameState == GAME_ACTIVE) {
         startGame();
     } else {
@@ -113,8 +111,8 @@ void initializeInterrupts() {
 void checkButton(void) {
     u16 buttons = INPUT;
 
+    // KEY_A (z) -> start the game, in "Normal Mode" (from the main menu)
     if ((buttons & KEY_A) == KEY_A) {
-        // set up Key A as the button to start the game (from the main menu)
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_NORMAL;
@@ -123,6 +121,7 @@ void checkButton(void) {
         //startGame();
     }
 
+    // KEY_B (x) -> start the game, in "Hard Mode" (from the main menu)
     if ((buttons & KEY_B) == KEY_B) {
         if (gameState == GAME_INACTIVE) {
             blankScreen();

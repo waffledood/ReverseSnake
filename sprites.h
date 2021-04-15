@@ -179,15 +179,38 @@ unsigned short sprites[] = {
     0,W,W,W,W,W,W,0,
     0,0,0,0,0,0,0,0,
 
-    // endGoal for player 
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
-    W,W,W,W,W,W,W,W,
+    // 16 64 letter P (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,W,W,W,W,W,0,0,
+    0,W,0,0,0,0,W,0,
+    0,W,W,W,W,W,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,W,0,0,0,0,0,0,
+    0,0,0,0,0,0,0,0,
+
+    // 17 65 letter U (Unicode font)
+    0,0,0,0,0,0,0,0,
+    0,W,0,0,0,0,W,0,
+    0,W,0,0,0,0,W,0,
+    0,W,0,0,0,0,W,0,
+    0,W,0,0,0,0,W,0,
+    0,W,0,0,0,0,W,0,
+    0,0,W,W,W,W,0,0,
+    0,0,0,0,0,0,0,0,
+
+
+    // other Sprites 
+
+    // 18 endGoal for player 
+    0,0,0,0,0,0,0,0,
+    R,W,W,W,0,0,0,W,
+    R,W,W,W,W,W,W,W,
+    R,W,W,W,W,W,W,W,
+    R,W,W,W,W,W,W,W,
+    R,0,0,0,W,W,W,0,
+    R,0,0,0,0,0,0,0,
+    R,0,0,0,0,0,0,0,
 
 };
 
