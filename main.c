@@ -65,6 +65,7 @@ void initalizeGame() {
     } else if (gameState == GAME_PAUSE) {
         setPauseMenu(); 
     } else if (gameState == GAME_ACTIVE) {
+        displayLevelNumber(stage); 
         startGame();
     } else {
         setMainMenu();
