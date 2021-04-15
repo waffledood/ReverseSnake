@@ -63,7 +63,7 @@ void initalizeGame() {
         spawnEntities();
         gameState = GAME_ACTIVE;
     } else if (gameState == GAME_PAUSE) {
-        setPauseMenu();
+        setPauseMenu(); 
     } else if (gameState == GAME_ACTIVE) {
         startGame();
     } else {
