@@ -38,6 +38,18 @@ void setMainMenu() {
     for (i = 0; i < 5; i++) {
         drawSprite(start_menu[i], 16 + i, 100 + (i * 8), 120/2 + 20);
     }
+
+    // draw "HARD MODE"
+
+    // draw "B Select" button
+    drawSprite(19, 26, 90, 120/2 + 30);
+
+    // draw "HARD MODE" option
+    //int start_menu[] = {8, 9, 10, 11, 9};
+    int hard_mode[] = {8, 9, 10, 11, 9, 22, 20, 10, 11, 21, 23};
+    for (i = 0; i < 11; i++) {
+        drawSprite(hard_mode[i], 27 + i, 100 + (i * 8), 120/2 + 30);
+    }
     
 }
 
@@ -47,8 +59,9 @@ void setPauseMenu() {
     int i;
     int pause_menu[] = {16, 10, 17, 8, 15};
 
+    // draw "PAUSE" title 
     for (i = 0; i < 5; i++) {
-        drawSprite(pause_menu[i], 21+i, 100 + (i * 10), 120/2);
+        drawSprite(pause_menu[i], 21 + i, 100 + (i * 10), 120/2);
     }
 
 }
