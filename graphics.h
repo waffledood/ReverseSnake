@@ -54,7 +54,6 @@ void setMainMenu() {
     drawSprite(19, 26, 90, 120/2 + 30);
 
     // draw "HARD MODE" option
-    //int start_menu[] = {8, 9, 10, 11, 9};
     int hard_mode[] = {8, 9, 10, 11, 9, 22, 20, 10, 11, 21, 23};
     for (i = 0; i < 11; i++) {
         drawSprite(hard_mode[i], 27 + i, 100 + (i * 8), 120/2 + 30);
@@ -80,11 +79,10 @@ void displayLevelNumber(int levelNumb) {
     int i;
     int level_text[] = {13, 15, 14, 15, 13, 24};
 
+    // draw "Level" text
     for (i = 0; i < 6; i++) {
         drawSprite(level_text[i], 38 + i, 0 + (i * 8), 0);
     }
-
-    //int level_number[] = {1, 2, 3, 4, 5};
     
     // draw Level Number
     drawSprite(levelNumb / 10 + 25, 44, 48, 0);

@@ -55,8 +55,7 @@ void handler(void) {
 
 // function to initialize the game
 void initalizeGame() {
-    /*time++;
-    in num = time / 1000; */
+    
     checkButton();
 
     if (gameState == GAME_INITIALIZE) {
@@ -85,7 +84,7 @@ void startGame() {
         blankScreen();
         return;
 
-        // if player reaches endGoal, increase stage
+    // if player reaches endGoal, increase stage
     } else if (isPositionEqual(player.position, endGoal)) {
         gameState = GAME_INITIALIZE;
         stage++;
@@ -119,7 +118,6 @@ void checkButton(void) {
             gameMode = MODE_NORMAL;
             gameState = GAME_INITIALIZE;
         }
-        //startGame();
     }
 
     // KEY_B (x) -> start the game, in "Hard Mode" (from the main menu)
@@ -127,14 +125,12 @@ void checkButton(void) {
         if (gameState == GAME_INACTIVE) {
             blankScreen();
             gameMode = MODE_HARD;
-            // gameState = GAME_ACTIVE;
             gameState = GAME_INITIALIZE;
         }
     }
 
     // KEY_SELECT (backspace) -> pause game whilst mid-game
     if ((buttons & KEY_SELECT) == KEY_SELECT) {
-        // set up "Select" button as the button to pause the game
         if (gameState == GAME_ACTIVE) {
             blankScreen();
             gameState = GAME_PAUSE;
