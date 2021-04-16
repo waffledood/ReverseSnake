@@ -5,9 +5,9 @@
 #include "snake.h"
 #include "sprites.h"
 
-#define SPRITE_END_GOAL_ID 0
-#define SPRITE_PLAYER_ID 1
-#define SPRITE_SNAKE_ID 2
+#define SPRITE_END_GOAL_ID 100
+#define SPRITE_PLAYER_ID 101
+#define SPRITE_SNAKE_ID 102
 
 void setMainMenu();
 void setPauseMenu();
