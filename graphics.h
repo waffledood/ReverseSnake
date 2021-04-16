@@ -9,11 +9,15 @@
 #define SPRITE_PLAYER_ID 1
 #define SPRITE_SNAKE_ID 2
 
+void setMainMenu();
+void setPauseMenu();
+void displayLevelNumber(int levelNumb);
 void blankScreen(void);
 void initializeGraphics();
 void drawSprite(int spriteId, int N, int x, int y);
 void drawPlayer(struct Player player);
 void drawSnake(struct Snake *snake);
+void drawEndGoal(struct Position endGoal);
 struct Position gridToPixelPos(struct Position gridPos);
 
 /*
@@ -142,8 +146,8 @@ void drawSnake(struct Snake *snake) {
     }
 }
 
-void drawEndGoal(struct Position *endGoal) {
-    struct Position pixelPos = gridToPixelPos(*endGoal);
+void drawEndGoal(struct Position endGoal) {
+    struct Position pixelPos = gridToPixelPos(endGoal);
     drawSprite(SPRITE_END_GOAL, SPRITE_END_GOAL_ID, pixelPos.x, pixelPos.y);
 }
 

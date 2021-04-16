@@ -42,8 +42,8 @@ void spawnEntities();
 // enum to track the state of the game
 enum GAME_STATE gameState = GAME_INACTIVE;
 enum GAME_MODE gameMode = MODE_NORMAL;
-
 enum DIRECTION lastDirection = NONE;
+
 struct Player player;
 struct Snake snake;
 struct Position endGoal;
@@ -102,7 +102,7 @@ void startGame() {
 
     drawPlayer(player);
     drawSnake(&snake);
-    drawEndGoal(&endGoal);
+    drawEndGoal(endGoal);
 }
 
 void initializeInterrupts() {
