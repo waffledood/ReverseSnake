@@ -18,34 +18,76 @@ void drawPlayer(struct Player player);
 void drawSnake(struct Snake *snake);
 struct Position gridToPixelPos(struct Position gridPos);
 
+/*
+Note for devs on the order in which sprite numbers are assigned
+
+Snake Title
+A Select button 
+START option
+PAUSE title 
+HARD MODE option 
+LEVEL text 
+Level Number 
+
+*/
 
 // Function to enable & set the Main Menu for players
 void setMainMenu() {
 
-    // clear out screen 
-    //blankScreen();
-
-    // set up Sprites for main menu 
     int i;
+
     // draw "Snake" title
-    for (i = 0; i < 5; i++) 
+    for (i = 0; i < 5; i++) {
         drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
+    }
 
-    // draw "A" button
-    drawSprite(16, 15, 90, 120/2 + 20);
+    // draw "A Select" button
+    drawSprite(12, 15, 90, 120/2 + 20);
+
     // draw "START" option
-    for (i = 0; i < 4; i++)
-        drawSprite(8 + i, 16 + i, 100 + (i * 8), 120/2 + 20);
-    drawSprite(9, 20, 132, 120/2 + 20);
+    int start_menu[] = {8, 9, 10, 11, 9};
+    for (i = 0; i < 5; i++) {
+        drawSprite(start_menu[i], 16 + i, 100 + (i * 8), 120/2 + 20);
+    }
 
-    //
-    //drawEndGoal();
+    // draw "B Select" button
+    drawSprite(19, 26, 90, 120/2 + 30);
 
+    // draw "HARD MODE" option
+    int hard_mode[] = {8, 9, 10, 11, 9, 22, 20, 10, 11, 21, 23};
+    for (i = 0; i < 11; i++) {
+        drawSprite(hard_mode[i], 27 + i, 100 + (i * 8), 120/2 + 30);
+    }
+    
 }
 
 // Function to enable & set the Pause Menu for players 
 void setPauseMenu() {
-    //TODO
+
+    int i;
+    int pause_menu[] = {16, 10, 17, 8, 15};
+
+    // draw "PAUSE" title 
+    for (i = 0; i < 5; i++) {
+        drawSprite(pause_menu[i], 21 + i, 100 + (i * 10), 120/2);
+    }
+}
+
+// Function to display the Level Number for players 
+void displayLevelNumber(int levelNumb) {
+    
+    int i;
+    int level_text[] = {13, 15, 14, 15, 13, 24};
+
+    // draw "Level" text
+    for (i = 0; i < 6; i++) {
+        drawSprite(level_text[i], 38 + i, 0 + (i * 8), 0);
+    }
+    
+    // draw Level Number
+    drawSprite(levelNumb / 10 + 25, 44, 48, 0);
+    drawSprite(levelNumb % 10 + 25, 45, 56, 0);
+
 }
 
 // Function to clear screen of existing sprites
@@ -110,7 +152,7 @@ void drawSnake(struct Snake *snake) {
 void drawEndGoal(struct Position *endGoal) {
     struct Position pixelPos = gridToPixelPos(*endGoal);
     //drawSprite(SPRITE_END_GOAL, 99 ,pixelPos.x, pixelPos.y);
-    drawSprite(16, 99, pixelPos.x, pixelPos.y);
+    drawSprite(18, 99, pixelPos.x, pixelPos.y);
 }
 
 struct Position gridToPixelPos(struct Position gridPos) {
