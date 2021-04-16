@@ -15,9 +15,22 @@ struct Player {
 };
 
 struct Player constructPlayer(int x, int y, double speed) {
+
+    if (x > GRID_MAX_X) {
+        x = GRID_MAX_X;
+    } else if (x < GRID_MIN_X) {
+        x = GRID_MIN_X;
+    }
+
+    if (y > GRID_MAX_Y) {
+        y = GRID_MAX_Y;
+    } else if (y < GRID_MIN_Y) {
+        y = GRID_MIN_Y;
+    }
+
     struct Player p;
-    p.position.x = (x > GRID_MAX_X) ? GRID_MAX_X : x;
-    p.position.y = (y > GRID_MAX_Y) ? GRID_MAX_Y : y;
+    p.position.x = x;
+    p.position.y = y;
     p.ticksElapsed = 0;
     setPlayerSpeed(&p, speed);
 
@@ -34,13 +47,13 @@ void movePlayer(struct Player* p, enum DIRECTION dir) {
 
     switch (dir) {
         case UP:
-            p->position.y = (p->position.y == 0) ? 0 : p->position.y - 1;
+            p->position.y = (p->position.y == GRID_MIN_Y) ? GRID_MIN_Y : p->position.y - 1;
             break;
         case DOWN:
             p->position.y = (p->position.y == GRID_MAX_Y) ? GRID_MAX_Y : p->position.y + 1;
             break;
         case LEFT:
-            p->position.x = (p->position.x == 0) ? 0 : p->position.x - 1;
+            p->position.x = (p->position.x == GRID_MIN_X) ? GRID_MIN_X : p->position.x - 1;
             break;
         case RIGHT:
             p->position.x = (p->position.x == GRID_MAX_X) ? GRID_MAX_X : p->position.x + 1;
