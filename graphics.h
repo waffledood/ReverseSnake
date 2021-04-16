@@ -5,11 +5,9 @@
 #include "snake.h"
 #include "sprites.h"
 
-#define SPRITE_WIDTH 10
-#define EMPTY_DIGIT -1
+#define SPRITE_END_GOAL_ID 0
 #define SPRITE_PLAYER_ID 1
 #define SPRITE_SNAKE_ID 2
-
 
 void blankScreen(void);
 void initializeGraphics();
@@ -33,49 +31,45 @@ Level Number
 
 // Function to enable & set the Main Menu for players
 void setMainMenu() {
-
     int i;
 
     // draw "Snake" title
     for (i = 0; i < 5; i++) {
-        drawSprite(3 + i, 10 + i, 100 + (i * 10), 120/2);
+        drawSprite(3 + i, 10 + i, 100 + (i * 10), 120 / 2);
     }
 
     // draw "A Select" button
-    drawSprite(12, 15, 90, 120/2 + 20);
+    drawSprite(12, 15, 90, 120 / 2 + 20);
 
     // draw "START" option
     int start_menu[] = {8, 9, 10, 11, 9};
     for (i = 0; i < 5; i++) {
-        drawSprite(start_menu[i], 16 + i, 100 + (i * 8), 120/2 + 20);
+        drawSprite(start_menu[i], 16 + i, 100 + (i * 8), 120 / 2 + 20);
     }
 
     // draw "B Select" button
-    drawSprite(19, 26, 90, 120/2 + 30);
+    drawSprite(19, 26, 90, 120 / 2 + 30);
 
     // draw "HARD MODE" option
     int hard_mode[] = {8, 9, 10, 11, 9, 22, 20, 10, 11, 21, 23};
     for (i = 0; i < 11; i++) {
-        drawSprite(hard_mode[i], 27 + i, 100 + (i * 8), 120/2 + 30);
+        drawSprite(hard_mode[i], 27 + i, 100 + (i * 8), 120 / 2 + 30);
     }
-    
 }
 
-// Function to enable & set the Pause Menu for players 
+// Function to enable & set the Pause Menu for players
 void setPauseMenu() {
-
     int i;
     int pause_menu[] = {16, 10, 17, 8, 15};
 
-    // draw "PAUSE" title 
+    // draw "PAUSE" title
     for (i = 0; i < 5; i++) {
-        drawSprite(pause_menu[i], 21 + i, 100 + (i * 10), 120/2);
+        drawSprite(pause_menu[i], 21 + i, 100 + (i * 10), 120 / 2);
     }
 }
 
-// Function to display the Level Number for players 
+// Function to display the Level Number for players
 void displayLevelNumber(int levelNumb) {
-    
     int i;
     int level_text[] = {13, 15, 14, 15, 13, 24};
 
@@ -83,11 +77,10 @@ void displayLevelNumber(int levelNumb) {
     for (i = 0; i < 6; i++) {
         drawSprite(level_text[i], 38 + i, 0 + (i * 8), 0);
     }
-    
+
     // draw Level Number
     drawSprite(levelNumb / 10 + 25, 44, 48, 0);
     drawSprite(levelNumb % 10 + 25, 45, 56, 0);
-
 }
 
 // Function to clear screen of existing sprites
@@ -151,8 +144,7 @@ void drawSnake(struct Snake *snake) {
 
 void drawEndGoal(struct Position *endGoal) {
     struct Position pixelPos = gridToPixelPos(*endGoal);
-    //drawSprite(SPRITE_END_GOAL, 99 ,pixelPos.x, pixelPos.y);
-    drawSprite(18, 99, pixelPos.x, pixelPos.y);
+    drawSprite(SPRITE_END_GOAL, SPRITE_END_GOAL_ID, pixelPos.x, pixelPos.y);
 }
 
 struct Position gridToPixelPos(struct Position gridPos) {
@@ -163,24 +155,4 @@ struct Position gridToPixelPos(struct Position gridPos) {
     return pixelPos;
 }
 
-void drawU16(unsigned short num, int id, int x, int y) {
-    int digit_arr[5] = {EMPTY_DIGIT, EMPTY_DIGIT, EMPTY_DIGIT, EMPTY_DIGIT, EMPTY_DIGIT};
-
-    if (num == 0) {
-        digit_arr[0] = 0;
-    }
-
-    int i;
-    for (i = 0; num > 0; i++) {
-        int digit = num % 10;
-        digit_arr[i] = digit;
-        num /= 10;
-    }
-
-    for (i = 5 - 1; i >= 0; i--) {
-        int pos = 5 - 1 - i;
-        int x_digit = x + SPRITE_WIDTH * pos;
-        drawSprite(digit_arr[i], id + i, x_digit, y);
-    }
-}
 #endif  // __GRAPHICS_H__
