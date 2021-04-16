@@ -2,16 +2,16 @@
 // C-Skeleton to be used with HAM Library from www.ngine.de
 // -----------------------------------------------------------------------------
 
+#include "gameStatus.h"
 #include "gba.h"
 #include "graphics.h"
 #include "player.h"
 #include "snake.h"
-#include "gameStatus.h"
 
 #define TICKS_PER_MILLISECOND 16781
 
 #define SPAWN_PLAYER_X_MIN 15
-#define SPAWN_PLAYER_Y_MIN 0
+#define SPAWN_PLAYER_Y_MIN 1
 #define SPAWN_PLAYER_X_MAX 23
 #define SPAWN_PLAYER_Y_MAX 5
 
@@ -30,7 +30,16 @@
 #define NORMAL_SPEED_GROWTH_RATE 0.1
 #define HARD_SPEED_GROWTH_RATE 0.2
 
-// pseudo boolean to track the state of the game
+void handler(void);
+void initalizeGame();
+void startGame();
+void initializeInterrupts();
+void checkButton(void);
+struct Position getRandPos(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimitY);
+int isPlayerEaten(struct Snake* s, struct Player* p);
+void spawnEntities();
+
+// enum to track the state of the game
 enum GAME_STATE gameState = GAME_INACTIVE;
 enum GAME_MODE gameMode = MODE_NORMAL;
 
@@ -40,12 +49,13 @@ struct Snake snake;
 struct Position endGoal;
 
 int stage = 1;
-unsigned time = 0;
+unsigned long ticks = 0;
 
 void handler(void) {
     REG_IME = 0x00;  // Stop all other interrupt handling, while we handle this current one
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) {
+        ticks++;
         initalizeGame();
     }
 
@@ -55,16 +65,15 @@ void handler(void) {
 
 // function to initialize the game
 void initalizeGame() {
-    
     checkButton();
 
     if (gameState == GAME_INITIALIZE) {
         spawnEntities();
         gameState = GAME_ACTIVE;
     } else if (gameState == GAME_PAUSE) {
-        setPauseMenu(); 
+        setPauseMenu();
     } else if (gameState == GAME_ACTIVE) {
-        displayLevelNumber(stage); 
+        displayLevelNumber(stage);
         startGame();
     } else {
         setMainMenu();
@@ -73,7 +82,6 @@ void initalizeGame() {
 
 // function to start the game
 void startGame() {
-    time++;
     movePlayer(&player, lastDirection);
     moveSnake(&snake, player.position);
 
@@ -159,7 +167,7 @@ void checkButton(void) {
 }
 
 struct Position getRandPos(int lowerLimitX, int lowerLimitY, int upperLimitX, int upperLimitY) {
-    srand(time);
+    srand(ticks);
 
     struct Position pos;
 

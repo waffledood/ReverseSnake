@@ -27,7 +27,7 @@ struct Player constructPlayer(int x, int y, double speed) {
     } else if (y < GRID_MIN_Y) {
         y = GRID_MIN_Y;
     }
-    
+
     struct Player p;
     p.position.x = x;
     p.position.y = y;

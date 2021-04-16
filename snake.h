@@ -1,9 +1,15 @@
 #ifndef __SNAKE_H__
 #define __SNAKE_H__
 
+#include "motion.h"
+
 #define MAX_SNAKE_LENGTH 100
 
-#include "motion.h"
+struct Snake constructSnake(int x, int y, double speed, int length);
+void growSnake(struct Snake *s);
+void moveSnake(struct Snake *s, struct Position playerPos);
+void updateSnakeBody(struct Snake *s, struct Position newPos);
+void setSnakeSpeed(struct Snake *s, double speed);
 
 struct Snake {
     struct Position body[MAX_SNAKE_LENGTH];
