@@ -1,0 +1,70 @@
+[class | Autotext\class]
+class |
+{
+	public:
+	protected:
+	private:
+};
+
+
+[/*! | Autotext\/*!]
+/*!
+\brief |Brief description
+
+\param
+
+\return
+
+More detailed description here ....
+
+\sa
+*/
+
+[#ifn | Autotext\#ifn]
+#ifndef |
+#define 
+
+
+#endif
+
+[#d | Autotext\#d]
+#define |
+
+[#u | Autotext\#u]
+#undef |
+
+[#in | Autotext\#in]
+#include "|"
+
+[#inc | Autotext\#inc]
+#include <|>
+
+
+[// | Autotext\//]
+////////////////////////////////////////////////////////////////////////////////|
+
+[/// | Autotext\///]
+////////////////////////////////////////////////////////////////////////////////
+// |
+////////////////////////////////////////////////////////////////////////////////
+
+[for | Autotext\for]
+for(|)
+{
+}
+
+[fori | Autotext\fori]
+for(i = 0; i<|; i++)
+{
+}
+
+[t | Autotext\t]
+typedef |
+
+
+[ts | Autotext\ts]
+typedef struct |
+{
+
+};
+
