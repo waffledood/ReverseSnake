@@ -1,7 +1,12 @@
 # Reverse Snake
 
+![reverse-snake-gameplay-gif](docs/reverse-snake.gif)
+
 Reverse Snake is our reimagining of the classic [Snake](https://en.wikipedia.org/wiki/Snake_(video_game_genre)) game! 
-In classic Snake, the player controls the Snake to locate & eat a food item. In Reverse Snake, the player instead controls the food item to reach a destination without getting eaten by the Snake.
+
+In classic Snake, the player controls the Snake to locate & eat a food item. 
+
+In Reverse Snake, the player instead controls the food item to reach a destination without getting eaten by the Snake. Doing so progresses the player to the next level. For each level, the Snake's speed gets incrementally faster than its previous & the player & Snake are spawned at random locations in the map, but always in opposite quadrants.
 
 Reverse Snake can be played on the Visual Boy Advance (VBA) emulator. Reverse Snake is written in Assembly & C.
 
