@@ -10,7 +10,6 @@ Reverse Snake was built with ❤️ by [Bryan Zheng](https://github.com/Ashuh), 
 ## Sources of Inspiration
 
 Below were various sources that inspired us:
-- https://github.com/nikuz/reverse-snake-game
-- http://reverse-snake.github.io/ (Reverse Snake where the placement of food is static & we try to crash the snake)
-- Coding Dojo's [Reverse Snake](https://youtu.be/zH3zyZ4q0oU) where the food's movement can be controlled & we need to outrun the snake
+- [Reverse Snake](http://reverse-snake.github.io/), where players place a food item at random locations to forcibly crash the snake
+- Coding Dojo's [Reverse Snake](https://youtu.be/zH3zyZ4q0oU), where players control the food's movement & try to outrun the snake
 
