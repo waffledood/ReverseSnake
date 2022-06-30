@@ -1,10 +1,11 @@
 # Reverse Snake
 
-This project is our reimagining of the classic Snake game, Reverse Snake! In classic Snake, the player controls the Snake to locate & eat a food item. In Reverse Snake, the player instead controls the food item to reach a destination without getting eaten by the Snake.
+Reverse Snake is our reimagining of the classic [Snake](https://en.wikipedia.org/wiki/Snake_(video_game_genre)) game! 
+In classic Snake, the player controls the Snake to locate & eat a food item. In Reverse Snake, the player instead controls the food item to reach a destination without getting eaten by the Snake.
 
 Reverse Snake can be played on the Visual Boy Advance (VBA) emulator. Reverse Snake is written in Assembly & C.
 
-Reverse Snake was built with ❤️ by [Bryan Zheng](), [Haikal Yusuf]() & [Selvavignesh]().
+Reverse Snake was built with ❤️ by [Bryan Zheng](https://github.com/Ashuh), [Haikal Yusuf](https://github.com/waffledood) & [Selva Vignesh](https://github.com/selvavignesh-2206).
 
 ## Sources of Inspiration
 
